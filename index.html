@@ -1,0 +1,2626 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Belquis Tours | Egypt Travel & Tourism</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --navy: #0B1F3A;
+      --navy-mid: #122848;
+      --navy-light: #1A3560;
+      --cream: #FAF6EF;
+      --white: #FFFFFF;
+      --text-muted: #8899AA;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ─── */
+    .navbar-top {
+      background: #122038;
+      color: rgba(255,255,255,0.9);
+      font-size: 13px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .navbar-top-inner {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .top-meta,
+    .top-contact {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+    .top-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.86);
+      white-space: nowrap;
+    }
+    .top-item i {
+      color: var(--gold-light);
+      font-size: 12px;
+    }
+    .navbar-main {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(11,31,58,0.08);
+      box-shadow: 0 10px 28px rgba(11,31,58,0.05);
+    }
+    .navbar-main-inner {
+      min-height: 100px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 28px;
+    }
+    .navbar-brand-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-logo-img {
+      display: block;
+      height: 74px;
+      width: auto;
+      object-fit: contain;
+    }
+    .brand-name {
+      color: #13294b;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 34px;
+    }
+    .nav-links a {
+      color: #27344b !important;
+      font-size: 17px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color .25s;
+      position: relative;
+      padding: 8px 0;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      margin: auto;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width .25s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #0f172c !important;
+      font-weight: 700;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+    .btn-admin {
+      background: #d4af63;
+      border: none;
+      color: var(--white) !important;
+      padding: 15px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all .25s;
+      min-width: 166px;
+    }
+    .btn-admin:hover {
+      background: #c9a24f;
+      color: var(--white) !important;
+      transform: translateY(-1px);
+    }
+    .btn-mobile-menu {
+      color: var(--navy);
+      border: 1px solid rgba(11,31,58,0.14);
+      background: var(--white);
+      border-radius: 10px;
+      padding: 8px 12px;
+    }
+    .mobile-brand {
+      display: none;
+      margin: 0 auto;
+    }
+    .btn-mobile-portal {
+      display: none;
+    }
+    .mobile-brand-mark {
+      display: none;
+      width: 48px;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-left: auto;
+      width: auto;
+    }
+    .mobile-brand-mark img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.18));
+    }
+    .mobile-brand-mark span {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+    .mobile-menu-panel {
+      display: none;
+    }
+    .desktop-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 74vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        linear-gradient(rgba(32, 18, 10, 0.34), rgba(32, 18, 10, 0.34)),
+        url('https://images.unsplash.com/photo-1539768942893-daf53e448371?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    }
+    .hero-bg-pattern,
+    .hero-stars {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-bg-pattern {
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.12), rgba(0,0,0,0.03) 35%, rgba(0,0,0,0.08)),
+        linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.22));
+      z-index: 1;
+    }
+    .hero-stars {
+      z-index: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: twinkle var(--d, 3s) infinite alternate;
+    }
+    @keyframes twinkle { 0%{opacity:.15} 100%{opacity:.8} }
+    .hero-slider-ui {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .hero.is-transitioning .hero-bg-pattern,
+    .hero.is-transitioning .hero-content {
+      opacity: 0.72;
+    }
+    .hero-bg-pattern,
+    .hero-content {
+      transition: opacity .35s ease;
+    }
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      color: #c45d14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.14);
+      cursor: pointer;
+      pointer-events: auto;
+      border: none;
+    }
+    .hero-arrow.left { left: 24px; }
+    .hero-arrow.right { right: 24px; }
+    .hero-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.95);
+      background: transparent;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+    .hero-dot.active {
+      background: #c45d14;
+      border-color: #c45d14;
+    }
+    .hero-logo {
+      position: absolute;
+      top: 18px;
+      left: 26px;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .hero-logo img {
+      display: block;
+      width: auto;
+      height: 64px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.18));
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 1100px;
+      padding: 70px 90px 88px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #c45d14;
+      color: var(--white);
+      font-size: 17px;
+      font-weight: 700;
+      padding: 16px 26px;
+      border-radius: 12px;
+      margin-bottom: 26px;
+      transform: rotate(-12deg);
+      box-shadow: 0 14px 36px rgba(114, 47, 10, 0.28);
+    }
+    .hero h1 {
+      font-family: 'Tajawal', sans-serif;
+      font-size: clamp(44px, 6vw, 72px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.06;
+      margin-bottom: 18px;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.22);
+    }
+    .hero h1 span {
+      color: inherit;
+      font-style: normal;
+    }
+    .hero-subtitle {
+      font-size: clamp(18px, 2vw, 24px);
+      color: rgba(255,255,255,0.88);
+      margin: 0 auto 10px;
+      font-weight: 600;
+      max-width: 960px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .hero-cta,
+    .hero-stats,
+    .hero-img-wrap {
+      display: none;
+    }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-tag {
+      display: inline-block;
+      color: var(--gold); font-size: 12px; letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px,4vw,48px);
+      color: var(--navy); line-height: 1.2;
+    }
+    .section-line {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      margin: 16px auto 0;
+    }
+
+    /* ─── SEARCH BAR ─── */
+    .search-section {
+      background: #f6efe2;
+      padding: 34px 0 22px;
+    }
+    .feature-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-bottom: 28px;
+    }
+    .feature-highlight {
+      background: #fff;
+      border: 1px solid #dfe6f2;
+      border-radius: 22px;
+      min-height: 210px;
+      padding: 34px 26px 28px;
+      text-align: center;
+      box-shadow: 0 8px 28px rgba(16, 31, 58, 0.04);
+    }
+    .feature-highlight .icon {
+      font-size: 38px;
+      line-height: 1;
+      margin-bottom: 26px;
+      display: inline-block;
+    }
+    .feature-highlight h3 {
+      margin: 0 0 12px;
+      color: #13294b;
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .feature-highlight p {
+      margin: 0;
+      color: #7b87a0;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    /* ─── TRIPS ─── */
+    .trips-section { padding: 80px 0; background: var(--cream); }
+
+    .filter-tabs {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      justify-content: center; margin-bottom: 48px;
+    }
+    .filter-tab {
+      padding: 8px 24px; border-radius: 100px;
+      border: 1px solid rgba(11,31,58,0.15);
+      background: var(--white); color: var(--navy);
+      font-family: 'Tajawal'; font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: all .25s;
+    }
+    .filter-tab.active, .filter-tab:hover {
+      background: var(--navy); color: var(--gold);
+      border-color: var(--navy);
+    }
+
+    /* ─── TRIP CARD ─── */
+    .trip-card {
+      background: var(--white);
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(11,31,58,0.07);
+      transition: all .35s cubic-bezier(.4,0,.2,1);
+      height: 100%;
+    }
+    .trip-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(11,31,58,0.15);
+    }
+    .trip-img-wrap { position: relative; overflow: hidden; height: 220px; }
+    .trip-img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s;
+    }
+    .trip-card:hover .trip-img { transform: scale(1.08); }
+    .trip-badge-top {
+      position: absolute; top: 14px; right: 14px;
+      background: var(--navy); color: var(--gold);
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      padding: 5px 12px; border-radius: 100px;
+    }
+    .trip-badge-hot {
+      position: absolute; top: 14px; left: 14px;
+      background: linear-gradient(135deg, #E74C3C, #C0392B);
+      color: var(--white);
+      font-size: 11px; font-weight: 700;
+      padding: 5px 12px; border-radius: 100px;
+    }
+    .trip-body { padding: 22px; }
+    .trip-destination {
+      font-size: 11px; color: var(--gold);
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .trip-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; color: var(--navy); margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .trip-description {
+      font-size: 13px; color: var(--text-muted);
+      line-height: 1.7; margin-bottom: 16px;
+    }
+    .trip-features {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .trip-feat {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 12px; color: var(--text-muted);
+    }
+    .trip-feat i { color: var(--gold); font-size: 13px; }
+    .trip-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 22px;
+      border-top: 1px solid rgba(11,31,58,0.06);
+    }
+    .trip-price .from { font-size: 11px; color: var(--text-muted); }
+    .trip-price .amount {
+      font-size: 24px; font-weight: 900; color: var(--navy);
+      line-height: 1;
+    }
+    .trip-price .amount span { font-size: 13px; color: var(--text-muted); font-weight: 400; }
+    .btn-book {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: var(--navy); border: none;
+      padding: 10px 22px; border-radius: 8px;
+      font-family: 'Tajawal'; font-size: 14px; font-weight: 700;
+      transition: all .3s;
+    }
+    .btn-book:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.4); }
+    .trip-rating { display: flex; align-items: center; gap: 4px; margin-bottom: 12px; }
+    .trip-rating .stars { color: var(--gold); font-size: 12px; }
+    .trip-rating .count { font-size: 12px; color: var(--text-muted); }
+
+    /* ─── EMPTY STATE ─── */
+    .empty-state {
+      text-align: center; padding: 80px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state i { font-size: 56px; color: var(--gold); opacity: .4; margin-bottom: 20px; }
+    .empty-state h4 { font-size: 20px; color: var(--navy); margin-bottom: 8px; }
+
+    /* ─── ABOUT COMPANY ─── */
+    .about-company-section {
+      position: relative;
+      padding: 92px 0;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(8, 18, 40, 0.86), rgba(8, 18, 40, 0.9)),
+        url('https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    }
+    .about-company-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 22% 28%, rgba(230, 112, 33, 0.12), transparent 35%);
+      pointer-events: none;
+    }
+    .about-shell {
+      position: relative;
+      z-index: 1;
+    }
+    .about-media {
+      position: relative;
+      min-height: 560px;
+      padding-left: 34px;
+      padding-bottom: 72px;
+    }
+    .about-main-photo {
+      width: min(100%, 410px);
+      height: 448px;
+      object-fit: cover;
+      border-radius: 0 48px 0 48px;
+      display: block;
+      box-shadow: 0 22px 60px rgba(0,0,0,0.28);
+    }
+    .about-logo-card {
+      position: absolute;
+      top: -28px;
+      left: 0;
+      width: 104px;
+      height: 104px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px;
+      box-shadow: 0 18px 34px rgba(0,0,0,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-logo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .about-circle-photo {
+      position: absolute;
+      left: -78px;
+      bottom: 40px;
+      width: 204px;
+      height: 204px;
+      border-radius: 50%;
+      border: 8px solid rgba(255,255,255,0.1);
+      object-fit: cover;
+      box-shadow: 0 20px 44px rgba(0,0,0,0.2);
+    }
+    .about-years-card {
+      position: absolute;
+      left: 168px;
+      bottom: 18px;
+      width: 248px;
+      background: rgba(15, 26, 59, 0.96);
+      border: 1px solid rgba(230, 112, 33, 0.8);
+      border-radius: 16px;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--white);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.2);
+    }
+    .about-years-card .num {
+      font-size: 52px;
+      line-height: 1;
+      font-weight: 900;
+      color: #f07c1f;
+    }
+    .about-years-card .txt {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .about-copy {
+      color: var(--white);
+      padding-left: 22px;
+    }
+    .about-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 62px;
+      padding: 14px 26px;
+      border-radius: 16px;
+      background: rgba(23, 38, 82, 0.95);
+      color: #f07c1f;
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 26px;
+    }
+    .about-copy h2 {
+      font-size: clamp(42px, 5vw, 72px);
+      line-height: 1.04;
+      font-weight: 900;
+      color: var(--white);
+      margin: 0 0 26px;
+    }
+    .about-copy .lead {
+      max-width: 620px;
+      font-size: 18px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 28px;
+    }
+    .about-points {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 640px;
+    }
+    .about-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 22px;
+    }
+    .about-point-icon {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: rgba(23, 38, 82, 0.96);
+      color: #f07c1f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      flex-shrink: 0;
+    }
+    .about-point h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.2;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .about-point p {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.88);
+    }
+
+    /* ─── SERVICES ─── */
+    .services-section {
+      padding: 86px 0 92px;
+      background:
+        radial-gradient(circle at top left, rgba(201, 168, 76, 0.1), transparent 24%),
+        linear-gradient(180deg, #fffdf8 0%, #fff 100%);
+    }
+    .services-intro {
+      max-width: 780px;
+      margin: 0 auto 42px;
+      text-align: center;
+      color: #6e7f98;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-bottom: 34px;
+    }
+    .service-tile {
+      position: relative;
+      min-height: 270px;
+      border-radius: 28px;
+      overflow: hidden;
+      padding: 28px;
+      display: flex;
+      align-items: end;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 18px 40px rgba(11,31,58,0.1);
+      isolation: isolate;
+    }
+    .service-tile::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(9, 20, 42, 0.12) 0%, rgba(9, 20, 42, 0.86) 100%);
+      z-index: -1;
+    }
+    .service-tile-content {
+      max-width: 420px;
+      color: var(--white);
+    }
+    .service-tile h3 {
+      margin: 0 0 10px;
+      font-size: clamp(24px, 2.3vw, 32px);
+      font-weight: 800;
+    }
+    .service-tile p {
+      margin: 0;
+      color: rgba(255,255,255,0.88);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+    .services-note {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      padding: 14px 24px;
+      border-radius: 16px;
+      background: #fbf1e1;
+      color: #d26a16;
+      font-size: 15px;
+      font-weight: 800;
+      margin: 0 auto 28px;
+    }
+    .services-reasons {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .reason-card {
+      background: #fff;
+      border: 1px solid rgba(11,31,58,0.07);
+      border-radius: 22px;
+      padding: 28px 26px;
+      box-shadow: 0 12px 30px rgba(11,31,58,0.05);
+      height: 100%;
+    }
+    .reason-card h3 {
+      margin: 0 0 12px;
+      color: #0d264d;
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .reason-card p {
+      margin: 0;
+      color: #6d7d97;
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-section {
+      background: #fff;
+      padding: 88px 0 96px;
+    }
+    .contact-header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+    .contact-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      color: #c9a84c;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .contact-kicker::before,
+    .contact-kicker::after {
+      content: '';
+      width: 48px;
+      height: 1px;
+      background: #c9a84c;
+    }
+    .contact-header h2 {
+      font-size: clamp(36px, 4.4vw, 62px);
+      font-weight: 900;
+      color: #0d264d;
+      margin: 0 0 12px;
+    }
+    .contact-header p {
+      margin: 0;
+      color: #7e8cab;
+      font-size: 18px;
+    }
+    .contact-panel {
+      align-items: start;
+    }
+    .contact-form-card {
+      background: #fbf4e6;
+      border-radius: 24px;
+      padding: 34px 34px 28px;
+      box-shadow: 0 16px 40px rgba(16, 31, 58, 0.08);
+    }
+    .contact-form-card h3 {
+      margin: 0 0 22px;
+      color: #0d264d;
+      font-size: 22px;
+      font-weight: 900;
+      text-align: right;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 14px;
+    }
+    .contact-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .contact-field.full {
+      grid-column: 1 / -1;
+    }
+    .contact-field label {
+      color: #0d264d;
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .contact-field input,
+    .contact-field select,
+    .contact-field textarea {
+      width: 100%;
+      min-height: 48px;
+      border-radius: 12px;
+      border: 1px solid #dbe2ef;
+      background: #fff;
+      padding: 14px 18px;
+      font-size: 15px;
+      color: #0d264d;
+      outline: none;
+    }
+    .contact-field textarea {
+      min-height: 118px;
+      resize: vertical;
+    }
+    .contact-submit {
+      width: 100%;
+      margin-top: 16px;
+      min-height: 50px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #11284e, #1a3560);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      transition: all .25s;
+    }
+    .contact-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(17, 40, 78, 0.2);
+    }
+    .contact-info {
+      padding-top: 10px;
+      padding-left: 36px;
+    }
+    .contact-info h3 {
+      margin: 0 0 28px;
+      color: #0d264d;
+      font-size: 22px;
+      font-weight: 900;
+      text-align: right;
+    }
+    .contact-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .contact-info-item {
+      display: grid;
+      grid-template-columns: 1fr 52px;
+      align-items: center;
+      gap: 16px;
+    }
+    .contact-info-item h4 {
+      margin: 0 0 6px;
+      color: #0d264d;
+      font-size: 17px;
+      font-weight: 900;
+      text-align: right;
+    }
+    .contact-info-item p {
+      margin: 0;
+      color: #7e8cab;
+      font-size: 16px;
+      line-height: 1.6;
+      text-align: right;
+    }
+    .contact-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #efcf73, #d6af44);
+      color: #0d264d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 8px 20px rgba(214, 175, 68, 0.28);
+    }
+
+    /* ─── FOOTER ─── */
+    footer.site-footer {
+      position: relative;
+      padding: 28px 0 10px;
+      color: rgba(255,255,255,0.82);
+      background:
+        linear-gradient(rgba(4, 12, 29, 0.9), rgba(4, 12, 29, 0.94)),
+        url('https://images.unsplash.com/photo-1539768942893-daf53e448371?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      overflow: hidden;
+    }
+    .footer-panel {
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .footer-brand-block {
+      max-width: 245px;
+    }
+    .footer-logo {
+      width: min(100%, 150px);
+      height: auto;
+      display: block;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.2));
+    }
+    .footer-tagline {
+      margin: 0 0 10px;
+      color: var(--white);
+      font-size: 13px;
+      line-height: 1.4;
+      font-weight: 800;
+    }
+    .footer-certifications {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .footer-badge {
+      min-height: 34px;
+      padding: 6px 10px;
+      border-radius: 9px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-links-title,
+    .footer-contact-title {
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 800;
+      margin: 0 0 12px;
+    }
+    .footer-side-grid {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+    .footer-mini-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 0;
+    }
+    .footer-mini-nav a {
+      color: rgba(255,255,255,0.86);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color .2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-mini-nav a::before {
+      content: '\203A';
+      color: var(--gold-light);
+      font-size: 16px;
+      line-height: 1;
+    }
+    .footer-mini-nav a:hover {
+      color: var(--gold-light);
+    }
+    .footer-links-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 34px;
+    }
+    .footer-links-grid ul,
+    .footer-contact-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .footer-links-grid li,
+    .footer-contact-list li {
+      margin-bottom: 14px;
+    }
+    .footer-links-grid a {
+      color: rgba(255,255,255,0.84);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color .2s ease, transform .2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-links-grid a::before {
+      content: '\203A';
+      color: var(--gold-light);
+      font-size: 20px;
+      line-height: 1;
+    }
+    .footer-links-grid a:hover {
+      color: var(--gold-light);
+      transform: translateX(2px);
+    }
+    .footer-contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.9);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .footer-contact-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      font-size: 13px;
+    }
+    .social-links {
+      display: flex;
+      justify-content: flex-end;
+      gap: 7px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .social-link {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      transition: all .25s;
+      text-decoration: none;
+    }
+    .social-link:hover {
+      background: var(--gold);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 10px;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 10px;
+      color: rgba(255,255,255,0.92);
+    }
+    .footer-bottom p {
+      margin: 0;
+    }
+
+    /* ─── TOAST ─── */
+    .toast-custom {
+      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+      background: var(--navy); color: var(--white);
+      border: 1px solid var(--gold);
+      padding: 14px 28px; border-radius: 12px;
+      font-size: 14px; font-weight: 500;
+      display: none; z-index: 9999;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .toast-custom.show { display: flex; align-items: center; gap: 10px; animation: fadeUp .3s; }
+    @keyframes fadeUp { from{opacity:0;transform:translateX(-50%) translateY(10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+    /* ─── BACK TO TOP ─── */
+    .back-top {
+      position: fixed; bottom: 30px; right: 30px;
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--gold); color: var(--navy);
+      border: none; font-size: 18px;
+      display: none; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 999;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.5);
+      transition: all .3s;
+    }
+    .back-top.show { display: flex; }
+    .back-top:hover { transform: translateY(-3px); }
+
+    /* ─── MODAL ─── */
+    .trip-modal .modal-content {
+      border: none; border-radius: 20px; overflow: hidden;
+    }
+    .trip-modal .modal-header {
+      background: var(--navy); border: none; padding: 20px 28px;
+    }
+    .trip-modal .modal-title { color: var(--gold); font-family: 'Playfair Display'; font-size: 22px; }
+    .trip-modal .btn-close { filter: invert(1); }
+    .trip-modal .modal-body { padding: 28px; }
+    .trip-modal .modal-footer { border-top: 1px solid rgba(11,31,58,0.08); padding: 16px 28px; }
+    .modal-trip-img { width: 100%; height: 260px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; }
+    .info-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;
+    }
+    .info-item {
+      background: var(--cream); border-radius: 10px; padding: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .info-item i { color: var(--gold); font-size: 18px; }
+    .info-item .lbl { font-size: 11px; color: var(--text-muted); }
+    .info-item .val { font-size: 14px; font-weight: 700; color: var(--navy); }
+
+    @media (max-width: 1199px) {
+      .navbar-top-inner {
+        gap: 14px;
+      }
+      .top-meta,
+      .top-contact {
+        gap: 12px;
+      }
+      .navbar-main-inner {
+        gap: 20px;
+      }
+      .nav-links {
+        gap: 20px;
+      }
+      .btn-admin {
+        min-width: 140px;
+        padding: 13px 20px;
+      }
+      .hero-content {
+        padding: 64px 72px 84px;
+      }
+      .feature-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .about-media {
+        min-height: 500px;
+        padding-left: 20px;
+      }
+      .about-circle-photo {
+        left: -40px;
+      }
+      .about-copy {
+        padding-left: 0;
+      }
+      .footer-panel {
+        max-width: 960px;
+      }
+    }
+
+    @media (max-width: 991px) {
+      .navbar-top {
+        font-size: 12px;
+      }
+      .navbar-top-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        padding: 10px 0;
+      }
+      .navbar-main-inner {
+        grid-template-columns: 1fr auto;
+        min-height: 84px;
+      }
+      .brand-logo-img {
+        height: 60px;
+      }
+      .brand-name {
+        font-size: 18px;
+      }
+      .hero {
+        min-height: 62vh;
+      }
+      .hero-content {
+        padding: 64px 44px 78px;
+      }
+      .hero h1 {
+        font-size: clamp(38px, 6vw, 56px);
+      }
+      .search-section,
+      .trips-section,
+      .services-section,
+      .contact-section {
+        padding-top: 68px;
+        padding-bottom: 68px;
+      }
+      .about-company-section {
+        padding: 74px 0 82px;
+      }
+      .about-media {
+        min-height: auto;
+        padding: 16px 0 132px;
+        margin-bottom: 24px;
+      }
+      .about-main-photo {
+        width: 100%;
+        max-width: none;
+      }
+      .about-circle-photo {
+        left: 14px;
+        width: 150px;
+        height: 150px;
+      }
+      .about-years-card {
+        left: 120px;
+        width: auto;
+        right: 0;
+      }
+      .about-copy h2 {
+        font-size: 42px;
+      }
+      .services-grid,
+      .services-reasons {
+        grid-template-columns: 1fr;
+      }
+      .contact-panel > [class*="col-"] {
+        width: 100%;
+      }
+      .contact-info {
+        padding-left: 0;
+        padding-top: 10px;
+      }
+      .footer-panel {
+        max-width: 100%;
+      }
+      .footer-brand-block {
+        max-width: 100%;
+      }
+      .footer-side-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar-main .container {
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .navbar-top { display: none; }
+      .navbar-main {
+        background: transparent;
+        border-bottom: 0;
+        box-shadow: none;
+        padding: 0;
+      }
+      .navbar-main-inner {
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
+        min-height: 64px;
+        gap: 10px;
+        padding: 0 14px;
+        border-radius: 14px 14px 0 0;
+        background: #11284b;
+        border: 1px solid rgba(255,255,255,0.12);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+      }
+      .navbar-brand-wrap {
+        display: none;
+      }
+      .desktop-actions {
+        display: none;
+      }
+      .btn-mobile-portal {
+        display: inline-flex;
+      }
+      .mobile-brand-mark {
+        display: inline-flex;
+      }
+      .btn-mobile-menu {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.16);
+        background: transparent;
+        color: #fff;
+        font-size: 22px;
+      }
+      .mobile-menu-panel {
+        display: block;
+        margin: 0;
+        padding: 16px 22px 18px;
+        border: 1px solid rgba(255,255,255,0.12);
+        border-top: 0;
+        border-radius: 0 0 14px 14px;
+        background: #11284b;
+      }
+      .mobile-menu-panel .mobile-nav-link {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        font-size: 19px;
+        font-weight: 800;
+        line-height: 1.45;
+        text-align: right;
+        padding: 13px 0;
+      }
+      .mobile-menu-panel .mobile-nav-link.admin-link {
+        color: #d7dced;
+      }
+      .hero {
+        min-height: 58vh;
+      }
+      .hero-content {
+        padding: 56px 24px 74px;
+      }
+      .hero-badge {
+        font-size: 14px;
+        padding: 13px 20px;
+        margin-bottom: 20px;
+      }
+      .hero-arrow {
+        width: 46px;
+        height: 46px;
+        font-size: 24px;
+      }
+      .hero-logo {
+        top: 12px;
+        left: 14px;
+      }
+      .hero-logo img {
+        height: 44px;
+      }
+      .hero-arrow.left { left: 12px; }
+      .hero-arrow.right { right: 12px; }
+      .section-header {
+        margin-bottom: 36px;
+      }
+      .section-title {
+        font-size: clamp(26px, 8vw, 36px);
+      }
+      .feature-cards {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-bottom: 22px;
+      }
+      .feature-highlight {
+        min-height: auto;
+        padding: 28px 20px;
+      }
+      .about-company-section {
+        padding: 78px 0 88px;
+      }
+      .about-media {
+        min-height: auto;
+        padding: 20px 0 148px;
+        margin-bottom: 28px;
+      }
+      .about-main-photo {
+        width: 100%;
+        height: 400px;
+      }
+      .about-logo-card {
+        top: 0;
+        left: 14px;
+        width: 86px;
+        height: 86px;
+      }
+      .about-circle-photo {
+        left: 8px;
+        bottom: 72px;
+        width: 140px;
+        height: 140px;
+      }
+      .about-years-card {
+        left: 132px;
+        right: 0;
+        width: auto;
+        bottom: 8px;
+        padding: 18px 18px;
+      }
+      .about-years-card .num {
+        font-size: 42px;
+      }
+      .about-copy {
+        padding-left: 0;
+      }
+      .about-pill {
+        min-height: 54px;
+        font-size: 16px;
+      }
+      .about-copy h2 {
+        font-size: 42px;
+      }
+      .about-copy .lead,
+      .about-point p {
+        font-size: 16px;
+      }
+      .services-section {
+        padding: 70px 0 76px;
+      }
+      .services-intro {
+        font-size: 15px;
+        margin-bottom: 30px;
+      }
+      .services-grid,
+      .services-reasons {
+        grid-template-columns: 1fr;
+      }
+      .service-tile {
+        min-height: 230px;
+        padding: 22px;
+        border-radius: 22px;
+      }
+      .service-tile h3 {
+        font-size: 24px;
+      }
+      .reason-card {
+        padding: 22px 20px;
+      }
+      .reason-card h3 {
+        font-size: 22px;
+      }
+      .footer-links-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .footer-tagline {
+        font-size: 17px;
+      }
+      .footer-side-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .social-links {
+        justify-content: flex-start;
+      }
+      .footer-bottom {
+        justify-content: center;
+        text-align: center;
+      }
+      .about-point {
+        gap: 16px;
+      }
+      .about-point-icon {
+        width: 62px;
+        height: 62px;
+        font-size: 28px;
+      }
+      .contact-section {
+        padding: 72px 0 78px;
+      }
+      .contact-form-card {
+        padding: 24px 20px;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-info {
+        padding-left: 0;
+        padding-top: 28px;
+      }
+      .info-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 575px) {
+      .container {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .navbar-top {
+        display: none;
+      }
+      .navbar-main-inner {
+        min-height: 58px;
+        padding: 0 10px;
+        border-radius: 12px 12px 0 0;
+      }
+      .btn-mobile-menu {
+        width: 34px;
+        height: 34px;
+        font-size: 20px;
+      }
+      .btn-mobile-portal {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        font-size: 14px;
+        display: none;
+      }
+      .mobile-brand-mark {
+        gap: 6px;
+      }
+      .mobile-brand-mark img {
+        width: 28px;
+        height: 28px;
+      }
+      .mobile-brand-mark span {
+        font-size: 11px;
+      }
+      .mobile-menu-panel {
+        padding: 12px 18px 16px;
+        border-radius: 0 0 12px 12px;
+      }
+      .mobile-menu-panel .mobile-nav-link {
+        font-size: 17px;
+        padding: 11px 0;
+        font-weight: 900;
+      }
+      .hero {
+        min-height: 70svh;
+      }
+      .hero-content {
+        padding: 70px 16px 72px;
+      }
+      .hero-badge {
+        font-size: 12px;
+        padding: 11px 16px;
+      }
+      .hero h1 {
+        font-size: clamp(31px, 10vw, 42px);
+        line-height: 1.12;
+      }
+      .hero-subtitle {
+        font-size: 15px;
+      }
+      .hero-arrow {
+        display: none;
+      }
+      .hero-dots {
+        bottom: 12px;
+        gap: 8px;
+      }
+      .feature-highlight,
+      .reason-card,
+      .contact-form-card {
+        border-radius: 18px;
+      }
+      .trip-body,
+      .trip-footer,
+      .service-tile,
+      .reason-card {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+      .trip-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+      .btn-book {
+        width: 100%;
+      }
+      .about-company-section {
+        padding: 62px 0 72px;
+      }
+      .about-media {
+        padding-bottom: 116px;
+      }
+      .about-main-photo {
+        height: 330px;
+        border-radius: 0 30px 0 30px;
+      }
+      .about-logo-card {
+        width: 72px;
+        height: 72px;
+        padding: 10px;
+      }
+      .about-circle-photo {
+        width: 110px;
+        height: 110px;
+        bottom: 60px;
+      }
+      .about-years-card {
+        left: 88px;
+        bottom: 4px;
+        padding: 14px 16px;
+      }
+      .about-years-card .num {
+        font-size: 34px;
+      }
+      .about-years-card .txt {
+        font-size: 13px;
+      }
+      .about-copy h2 {
+        font-size: 34px;
+      }
+      .about-copy .lead,
+      .about-point p,
+      .services-intro,
+      .service-tile p,
+      .reason-card p,
+      .contact-header p {
+        font-size: 14px;
+      }
+      .about-point-icon {
+        width: 54px;
+        height: 54px;
+        font-size: 24px;
+      }
+      .about-point h3,
+      .service-tile h3,
+      .reason-card h3,
+      .contact-form-card h3,
+      .contact-info h3 {
+        font-size: 20px;
+      }
+      .services-note {
+        min-height: 48px;
+        font-size: 12px;
+        padding: 12px 16px;
+        border-radius: 12px;
+      }
+      .contact-header {
+        margin-bottom: 30px;
+      }
+      .contact-form-card {
+        padding: 22px 18px;
+      }
+      .contact-field label,
+      .contact-info-item h4 {
+        font-size: 14px;
+      }
+      .contact-field input,
+      .contact-field select,
+      .contact-field textarea,
+      .contact-info-item p {
+        font-size: 14px;
+      }
+      .contact-submit {
+        min-height: 46px;
+        font-size: 16px;
+      }
+      .contact-info-list {
+        gap: 16px;
+      }
+      .contact-info-item {
+        grid-template-columns: 1fr 42px;
+        gap: 12px;
+      }
+      .contact-icon-box {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+      }
+      footer.site-footer {
+        padding-top: 24px;
+      }
+      .footer-panel {
+        max-width: 100%;
+      }
+      .footer-logo {
+        width: min(100%, 128px);
+      }
+      .footer-tagline {
+        font-size: 12px;
+      }
+      .footer-badge {
+        min-height: 30px;
+        padding: 5px 8px;
+        font-size: 10px;
+      }
+      .footer-side-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .footer-mini-nav {
+        gap: 6px;
+      }
+      .footer-mini-nav a,
+      .footer-contact-list li {
+        font-size: 11px;
+      }
+      .footer-contact-icon {
+        width: 26px;
+        height: 26px;
+        font-size: 11px;
+      }
+      .social-links {
+        justify-content: flex-start;
+      }
+      .social-link {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+      }
+      .footer-bottom {
+        font-size: 10px;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar-top">
+  <div class="container">
+    <div class="navbar-top-inner">
+      <div class="top-meta">
+        <span class="top-item"><i class="bi bi-telephone-fill"></i>01271780280</span>
+        <span class="top-item"><i class="bi bi-geo-alt-fill"></i>37 Abd el khalek tharwat, Cairo, Egypt</span>
+      </div>
+      <div class="top-contact">
+        <span class="top-item"><i class="bi bi-whatsapp"></i>01271180013</span>
+        <span class="top-item"><i class="bi bi-envelope-fill"></i>info@newbelquistours.com</span>
+      </div>
+    </div>
+  </div>
+</div>
+<nav class="navbar-main">
+  <div class="container">
+    <div class="navbar-main-inner">
+      <a href="#" class="navbar-brand-wrap">
+        <img src="image/new-belquis-logo.jpg" alt="New Belquis Tours" class="brand-logo-img">
+        <span class="brand-name">New Belquis Tours</span>
+      </a>
+      <div class="nav-links d-none d-md-flex align-items-center">
+        <a href="#" class="active">Home</a>
+        <a href="#trips">Tour Programs</a>
+        <a href="#services">Services</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+      <div class="desktop-actions">
+        <a href="#" class="btn-admin d-none d-md-inline-flex">Request a Quote</a>
+      </div>
+      <button class="d-md-none btn btn-mobile-menu" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
+        <i class="bi bi-list"></i>
+      </button>
+      <button class="btn-mobile-portal d-md-none" type="button" aria-label="Portal">
+        <img src="image/cropped-logo-fav-icon.png" alt="" style="width:20px;height:20px;object-fit:contain">
+      </button>
+      <div class="mobile-brand-mark" aria-hidden="true">
+        <img src="image/cropped-logo-fav-icon.png" alt="">
+        <span>New Belquis Tours</span>
+      </div>
+    </div>
+    <div class="collapse" id="mobileMenu">
+      <div class="mobile-menu-panel">
+        <a href="#" class="mobile-nav-link">Home</a>
+        <a href="#trips" class="mobile-nav-link">Tour Programs</a>
+        <a href="#services" class="mobile-nav-link">Services</a>
+        <a href="#about" class="mobile-nav-link">About Us</a>
+        <a href="#contact" class="mobile-nav-link">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="heroSection">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-stars" id="heroStars"></div>
+  <div class="hero-logo">
+    <img src="image/cropped-logo-fav-icon.png" alt="New Belquis Tours logo">
+  </div>
+  <div class="hero-slider-ui">
+    <button class="hero-arrow left" type="button" id="heroPrev"><i class="bi bi-chevron-left"></i></button>
+    <button class="hero-arrow right" type="button" id="heroNext"><i class="bi bi-chevron-right"></i></button>
+    <div class="hero-dots">
+      <button class="hero-dot active" type="button" data-hero-dot="0" aria-label="Slide 1"></button>
+      <button class="hero-dot" type="button" data-hero-dot="1" aria-label="Slide 2"></button>
+      <button class="hero-dot" type="button" data-hero-dot="2" aria-label="Slide 3"></button>
+      <button class="hero-dot" type="button" data-hero-dot="3" aria-label="Slide 4"></button>
+      <button class="hero-dot" type="button" data-hero-dot="4" aria-label="Slide 5"></button>
+      <button class="hero-dot" type="button" data-hero-dot="5" aria-label="Slide 6"></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 hero-content">
+        <div class="hero-badge" id="heroBadge">Let's Explore</div>
+        <h1 id="heroTitle">Discover Egypt Like Never Before</h1>
+        <p class="hero-subtitle" id="heroSubtitle">Unforgettable journeys through history, culture, and breathtaking landscapes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH BAR -->
+<section class="search-section">
+  <div class="container">
+    <div class="feature-cards">
+      <article class="feature-highlight">
+        <div class="icon">📞</div>
+        <h3>24/7 Support</h3>
+        <p>Our team is available to serve you anytime you need assistance.</p>
+      </article>
+      <article class="feature-highlight">
+        <div class="icon">🛡️</div>
+        <h3>Trusted Quality</h3>
+        <p>Carefully selected hotels and professional guides with outstanding service.</p>
+      </article>
+      <article class="feature-highlight">
+        <div class="icon">💰</div>
+        <h3>Best Price Guaranteed</h3>
+        <p>We match any published rate and always aim to give you better value.</p>
+      </article>
+      <article class="feature-highlight">
+        <div class="icon">🏅</div>
+        <h3>45 Years of Excellence</h3>
+        <p>A long-standing tourism experience built on trust, quality, and care.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TRIPS SECTION -->
+<section class="trips-section" id="trips">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">✦ Featured Offers</div>
+      <h2 class="section-title">Our Travel Packages</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active" data-cat="all">All</button>
+    </div>
+
+    <div class="row g-4" id="tripsGrid">
+      <!-- trips injected here -->
+    </div>
+
+    <div id="emptyState" class="empty-state" style="display:none">
+      <i class="bi bi-compass"></i>
+      <h4>No trips available right now</h4>
+      <p>Check back soon for the latest deals and featured tours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT COMPANY -->
+<section class="about-company-section" id="about">
+  <div class="container about-shell">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <div class="about-media">
+          <div class="about-logo-card">
+            <img src="image/new-belquis-logo.jpg" alt="New Belquis Tours">
+          </div>
+          <img src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?auto=format&fit=crop&w=900&q=80" alt="Hot air balloon tour in Egypt" class="about-main-photo">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=700&q=80" alt="Happy travelers" class="about-circle-photo">
+          <div class="about-years-card">
+            <div class="num">45</div>
+            <div class="txt">Years of<br>experience</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="about-copy">
+          <div class="about-pill">About Company</div>
+          <h2>Discover Egypt</h2>
+          <p class="lead">First of all, let us take this opportunity to introduce our company. We are Belquis Group of Companies, a well-established organization that has been shaping the tourism sector in Egypt since 1981.</p>
+          <div class="about-points">
+            <article class="about-point">
+              <div class="about-point-icon"><i class="bi bi-brightness-high"></i></div>
+              <div>
+                <h3>Authentic Experiences</h3>
+                <p>Discover Egypt with expertly designed tours that immerse you in its history and culture.</p>
+              </div>
+            </article>
+            <article class="about-point">
+              <div class="about-point-icon"><i class="bi bi-triangle"></i></div>
+              <div>
+                <h3>Tailored Journeys</h3>
+                <p>We customize every trip to match your preferences, from luxury escapes to adventure tours.</p>
+              </div>
+            </article>
+            <article class="about-point">
+              <div class="about-point-icon"><i class="bi bi-airplane"></i></div>
+              <div>
+                <h3>Trusted Expertise</h3>
+                <p>With years of experience, we guarantee smooth, reliable, and unforgettable travel moments.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">✦ Signature Services</div>
+      <h2 class="section-title">Services Designed Around Your Journey</h2>
+      <div class="section-line"></div>
+    </div>
+    <p class="services-intro">
+      We bring together business travel, event coordination, premium transport, and trusted hospitality partnerships to create smooth,
+      professional experiences from planning to arrival.
+    </p>
+    <div class="services-grid">
+      <article class="service-tile" style="background-image:url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80')">
+        <div class="service-tile-content">
+          <h3>Corporate Travel & Retreats</h3>
+          <p>Tailored travel programs for executive meetings, team retreats, and productivity-focused business journeys.</p>
+        </div>
+      </article>
+      <article class="service-tile" style="background-image:url('https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80')">
+        <div class="service-tile-content">
+          <h3>Exhibitions & Events</h3>
+          <p>End-to-end support for exhibitions, trade fairs, and branded events, including logistics and attendee coordination.</p>
+        </div>
+      </article>
+      <article class="service-tile" style="background-image:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=80')">
+        <div class="service-tile-content">
+          <h3>Meetings & Conferences</h3>
+          <p>Seamless planning for business meetings, seminars, and conferences with travel, venue, and hospitality arrangements.</p>
+        </div>
+      </article>
+      <article class="service-tile" style="background-image:url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1200&q=80')">
+        <div class="service-tile-content">
+          <h3>Incentive Trips</h3>
+          <p>Reward-driven experiences that inspire teams, strengthen partnerships, and leave a lasting impression.</p>
+        </div>
+      </article>
+    </div>
+    <div class="text-center">
+      <div class="services-note">Why Clients Choose Belquis for Premium Travel Services</div>
+    </div>
+    <div class="services-reasons">
+      <article class="reason-card">
+        <h3>Decades of Proven Expertise</h3>
+        <p>With more than four decades in travel and tourism, we deliver dependable planning, refined service, and confident execution.</p>
+      </article>
+      <article class="reason-card">
+        <h3>Strong Hospitality Network</h3>
+        <p>Our trusted hotel and supplier partnerships help us secure comfortable stays, reliable service, and excellent value.</p>
+      </article>
+      <article class="reason-card">
+        <h3>Tailor-Made Planning</h3>
+        <p>Every itinerary is shaped around your goals, whether you need corporate movement, group coordination, or a premium custom schedule.</p>
+      </article>
+      <article class="reason-card">
+        <h3>Responsive Ongoing Support</h3>
+        <p>Our team stays available throughout the journey to handle updates quickly and keep every detail running smoothly.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-header">
+      <div class="contact-kicker">Contact Us</div>
+      <h2>We Are Here for You</h2>
+      <p>Get in touch with us and let us help you plan your dream journey.</p>
+    </div>
+    <div class="row g-4 contact-panel">
+      <div class="col-lg-7">
+        <div class="contact-form-card">
+          <h3>Send Us a Message</h3>
+          <div class="contact-grid">
+            <div class="contact-field">
+              <label for="contactPhone">Phone Number</label>
+              <input id="contactPhone" type="text" placeholder="+20 100 000 0000">
+            </div>
+            <div class="contact-field">
+              <label for="contactName">Full Name *</label>
+              <input id="contactName" type="text" placeholder="Your name">
+            </div>
+            <div class="contact-field full">
+              <label for="contactEmail">Email Address *</label>
+              <input id="contactEmail" type="email" placeholder="your@email.com">
+            </div>
+            <div class="contact-field full">
+              <label for="contactTripType">Trip Type</label>
+              <select id="contactTripType">
+                <option value="">Choose trip type...</option>
+                <option>Luxury Escape</option>
+                <option>Cultural Tour</option>
+                <option>Adventure Trip</option>
+                <option>Family Holiday</option>
+                <option>Beach Getaway</option>
+              </select>
+            </div>
+            <div class="contact-field full">
+              <label for="contactMessage">Your Message *</label>
+              <textarea id="contactMessage" placeholder="Tell us more about your dream trip..."></textarea>
+            </div>
+          </div>
+          <button class="contact-submit" onclick="submitContactForm()">
+            <i class="bi bi-envelope-fill me-2"></i>Send Message
+          </button>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+          <div class="contact-info-list">
+            <article class="contact-info-item">
+              <div>
+                <h4>Phone</h4>
+                <p>01271780280</p>
+              </div>
+              <div class="contact-icon-box"><i class="bi bi-telephone-fill"></i></div>
+            </article>
+            <article class="contact-info-item">
+              <div>
+                <h4>WhatsApp</h4>
+                <p>01271180013</p>
+              </div>
+              <div class="contact-icon-box"><i class="bi bi-whatsapp"></i></div>
+            </article>
+            <article class="contact-info-item">
+              <div>
+                <h4>Email</h4>
+                <p>info@newbelquistours.com</p>
+              </div>
+              <div class="contact-icon-box"><i class="bi bi-envelope-at-fill"></i></div>
+            </article>
+            <article class="contact-info-item">
+              <div>
+                <h4>Address</h4>
+                <p>37 Abd el khalek tharwat, Cairo, Egypt</p>
+              </div>
+              <div class="contact-icon-box"><i class="bi bi-geo-alt-fill"></i></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-panel">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-5">
+        <div class="footer-brand-block">
+          <img src="image/cropped-logo-fav-icon.png" alt="New Belquis Tours" class="footer-logo">
+          <p class="footer-tagline">Crafting unforgettable journeys across Egypt since 1981</p>
+          <div class="footer-certifications">
+            <span class="footer-badge">SPITI WORLD</span>
+            <span class="footer-badge">USTOA</span>
+            <span class="footer-badge">IATA</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="footer-side-grid">
+          <div>
+            <h6 class="footer-links-title">Quick links</h6>
+            <nav class="footer-mini-nav" aria-label="Footer Navigation">
+              <a href="#">Home</a>
+              <a href="#trips">Tour Programs</a>
+              <a href="#services">Services</a>
+              <a href="#about">About Us</a>
+              <a href="#contact">Contact Us</a>
+            </nav>
+          </div>
+          <div>
+            <h6 class="footer-contact-title">Contact information</h6>
+            <ul class="footer-contact-list">
+              <li><span class="footer-contact-icon"><i class="bi bi-telephone-fill"></i></span><span>01271780280</span></li>
+              <li><span class="footer-contact-icon"><i class="bi bi-whatsapp"></i></span><span>01271180013</span></li>
+              <li><span class="footer-contact-icon"><i class="bi bi-envelope-fill"></i></span><span>info@newbelquistours.com</span></li>
+              <li><span class="footer-contact-icon"><i class="bi bi-geo-alt-fill"></i></span><span>37 Abd el khalek tharwat, Cairo, Egypt</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-link" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" class="social-link" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          <a href="#" class="social-link" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="social-link" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>2026 © All rights reserved New Belquis tours. Developed by TARGET DIGITAL SOLUTIONS</p>
+    </div>
+    </div>
+  </div>
+</footer>
+
+<!-- TRIP MODAL -->
+<div class="modal fade trip-modal" id="tripModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Trip Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button class="btn-book px-4 py-2 rounded-3" onclick="showToast('✅ Booking request sent! We will contact you soon.')">
+          <i class="bi bi-send-fill me-2"></i> Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-custom" id="toastMsg">
+  <i class="bi bi-check-circle-fill" style="color:var(--gold)"></i>
+  <span id="toastText"></span>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="bi bi-chevron-up"></i>
+</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+
+// ─── DEFAULT TRIPS (seed data) ───────────────────────────────────────────────
+const DEFAULT_TRIPS = [
+  {
+    id: 'def1',
+    title: 'Maldives - Paradise of the Indian Ocean',
+    destination: 'Maldives',
+    category: 'Beach',
+    duration: '7',
+    price: '2500',
+    oldPrice: '3200',
+    rating: '4.9',
+    reviews: '312',
+    seats: '8',
+    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80',
+    description: 'Discover the breathtaking beauty of the Maldives with a luxurious overwater villa stay and unforgettable diving and snorkeling trips.',
+    includes: 'Flights,5-Star Hotel,Meals,Tours',
+    featured: true,
+    hot: true
+  },
+  {
+    id: 'def2',
+    title: 'Paris - City of Light and Romance',
+    destination: 'France',
+    category: 'Culture',
+    duration: '5',
+    price: '1800',
+    oldPrice: '',
+    rating: '4.8',
+    reviews: '248',
+    seats: '15',
+    image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80',
+    description: 'A magical trip to the heart of Europe, from the Eiffel Tower and top French restaurants to world-famous museums.',
+    includes: 'Flights,4-Star Hotel,Breakfast,Tours',
+    featured: false,
+    hot: false
+  },
+  {
+    id: 'def3',
+    title: 'Istanbul - Between Two Continents',
+    destination: 'Turkey',
+    category: 'History',
+    duration: '5',
+    price: '950',
+    oldPrice: '1200',
+    rating: '4.7',
+    reviews: '420',
+    seats: '20',
+    image: 'https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=600&q=80',
+    description: 'A city where history meets modern life, featuring Hagia Sophia, the Grand Bazaar, and an unforgettable Bosphorus cruise.',
+    includes: 'Flights,5-Star Hotel,Meals,Tours',
+    featured: false,
+    hot: true
+  },
+  {
+    id: 'def4',
+    title: 'Bali - Island of the Gods',
+    destination: 'Indonesia',
+    category: 'Beach',
+    duration: '10',
+    price: '2200',
+    oldPrice: '',
+    rating: '4.9',
+    reviews: '185',
+    seats: '12',
+    image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80',
+    description: 'A one-of-a-kind spiritual and natural escape with unique temples, lush rice fields, and stunning beaches.',
+    includes: 'Flights,Private Villa,Meals,Yoga,Tours',
+    featured: true,
+    hot: false
+  },
+  {
+    id: 'def5',
+    title: 'Dubai - Brilliance of the Future',
+    destination: 'UAE',
+    category: 'Luxury',
+    duration: '4',
+    price: '1400',
+    oldPrice: '',
+    rating: '4.8',
+    reviews: '530',
+    seats: '25',
+    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80',
+    description: 'Experience luxury in the city of dreams with Burj Khalifa, Dubai Mall, desert adventures, and world-class hotels.',
+    includes: 'Flights,Luxury Hotel,Meals,Sightseeing,Tours',
+    featured: false,
+    hot: false
+  },
+  {
+    id: 'def6',
+    title: 'Rome - The Eternal Civilization',
+    destination: 'Italy',
+    category: 'Culture',
+    duration: '6',
+    price: '1600',
+    oldPrice: '1900',
+    rating: '4.7',
+    reviews: '295',
+    seats: '18',
+    image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80',
+    description: 'A tour through iconic historical landmarks including the Colosseum, Trevi Fountain, the Vatican, and authentic Italian cuisine.',
+    includes: 'Flights,4-Star Hotel,Breakfast,Tours',
+    featured: false,
+    hot: false
+  }
+];
+
+// ─── STORAGE ─────────────────────────────────────────────────────────────────
+let tripsCache = [];
+
+async function getTrips() {
+  try {
+    const response = await fetch('save.php', { cache: 'no-store' });
+    tripsCache = await response.json();
+    tripsCache = Array.isArray(tripsCache) ? tripsCache.filter((trip) => trip && trip.status !== false) : [];
+    return tripsCache;
+  } catch (e) {
+    return tripsCache.length ? tripsCache : DEFAULT_TRIPS.filter((trip) => trip && trip.status !== false);
+  }
+}
+
+// ─── RENDER TRIPS ─────────────────────────────────────────────────────────────
+let allTrips = [];
+
+function renderTrips(trips) {
+  const grid = document.getElementById('tripsGrid');
+  const empty = document.getElementById('emptyState');
+
+  if (!trips.length) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  const starsHTML = (r) => {
+    const n = parseFloat(r) || 5;
+    return Array.from({length:5}, (_,i) =>
+      `<i class="bi bi-star${i < Math.floor(n) ? '-fill' : (i < n ? '-half' : '')}"></i>`
+    ).join('');
+  };
+
+  grid.innerHTML = trips.map(t => `
+    <div class="col-md-6 col-lg-4">
+      <div class="trip-card" onclick="openModal('${t.id}')">
+        <div class="trip-img-wrap">
+          <img class="trip-img" src="${t.image}" alt="${t.title}" onerror="this.src='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80'"/>
+          <span class="trip-badge-top">${t.destination}</span>
+          ${t.hot ? '<span class="trip-badge-hot">🔥 Limited Offer</span>' : ''}
+        </div>
+        <div class="trip-body">
+          <div class="trip-destination"><i class="bi bi-geo-alt-fill"></i>${t.category || 'Travel'}</div>
+          <h5 class="trip-title">${t.title}</h5>
+          <div class="trip-rating">
+            <div class="stars">${starsHTML(t.rating)}</div>
+            <span class="count">(${t.reviews || '0'} reviews)</span>
+          </div>
+          <p class="trip-description">${(t.description||'').substring(0,90)}...</p>
+          <div class="trip-features">
+            <span class="trip-feat"><i class="bi bi-calendar3"></i>${t.duration} Days</span>
+            <span class="trip-feat"><i class="bi bi-people-fill"></i>${t.seats} Seats</span>
+            <span class="trip-feat"><i class="bi bi-check-circle-fill"></i>Flights Included</span>
+          </div>
+        </div>
+        <div class="trip-footer">
+          <div class="trip-price">
+            <div class="from">Starting from</div>
+            <div class="amount">$${Number(t.price).toLocaleString()} <span>/ person</span></div>
+            ${t.oldPrice ? `<div style="font-size:12px;color:#aaa;text-decoration:line-through">$${Number(t.oldPrice).toLocaleString()}</div>` : ''}
+          </div>
+          <button class="btn-book" onclick="event.stopPropagation(); openTripDetails('${t.id}')">Book Now</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openTripDetails(id) {
+  if (!id) return;
+  window.location.href = `trip-details.html?id=${encodeURIComponent(id)}`;
+}
+
+// ─── FILTER TABS ───────────────────────────────────────────────────────────────
+function buildFilterTabs(trips) {
+  const cats = ['all', ...new Set(trips.map(t => t.category).filter(Boolean))];
+  const wrap = document.getElementById('filterTabs');
+  wrap.innerHTML = cats.map(c => `
+    <button class="filter-tab${c==='all'?' active':''}" data-cat="${c}">
+      ${c === 'all' ? 'All' : c}
+    </button>
+  `).join('');
+  wrap.querySelectorAll('.filter-tab').forEach(btn => {
+    btn.addEventListener('click', function() {
+      wrap.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const cat = this.dataset.cat;
+      renderTrips(cat === 'all' ? allTrips : allTrips.filter(t => t.category === cat));
+    });
+  });
+}
+
+// ─── SEARCH ────────────────────────────────────────────────────────────────────
+function filterTrips() {
+  const dest = document.getElementById('searchDest').value.toLowerCase();
+  const dur = document.getElementById('searchDuration').value;
+  const bud = document.getElementById('searchBudget').value;
+  let res = [...allTrips];
+  if (dest) res = res.filter(t =>
+    t.title.toLowerCase().includes(dest) ||
+    t.destination.toLowerCase().includes(dest) ||
+    (t.description||'').toLowerCase().includes(dest)
+  );
+  if (dur) res = res.filter(t => t.duration === dur);
+  if (bud) {
+    if (bud === 'low') res = res.filter(t => +t.price < 1000);
+    else if (bud === 'mid') res = res.filter(t => +t.price >= 1000 && +t.price <= 3000);
+    else res = res.filter(t => +t.price > 3000);
+  }
+  renderTrips(res);
+  document.getElementById('trips').scrollIntoView({behavior:'smooth'});
+}
+
+// ─── MODAL ─────────────────────────────────────────────────────────────────────
+function openModal(id) {
+  const t = allTrips.find(x => x.id === id);
+  if (!t) return;
+  document.getElementById('modalTitle').textContent = t.title;
+  const includes = (t.includes||'').split(',').map(x => `<span class="badge rounded-pill me-1" style="background:rgba(201,168,76,.15);color:var(--gold)">${x.trim()}</span>`).join('');
+  document.getElementById('modalBody').innerHTML = `
+    <img src="${t.image}" class="modal-trip-img" onerror="this.src='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80'"/>
+    <p style="font-size:14px;line-height:1.8;color:var(--navy);margin-bottom:20px">${t.description||''}</p>
+    <div class="info-grid">
+      <div class="info-item"><i class="bi bi-geo-alt-fill"></i><div><div class="lbl">Destination</div><div class="val">${t.destination}</div></div></div>
+      <div class="info-item"><i class="bi bi-calendar3"></i><div><div class="lbl">Duration</div><div class="val">${t.duration} Days</div></div></div>
+      <div class="info-item"><i class="bi bi-people-fill"></i><div><div class="lbl">Available Seats</div><div class="val">${t.seats}</div></div></div>
+      <div class="info-item"><i class="bi bi-currency-dollar"></i><div><div class="lbl">Price</div><div class="val" style="color:var(--gold)">$${Number(t.price).toLocaleString()}</div></div></div>
+    </div>
+    <div style="margin-bottom:8px;font-size:13px;font-weight:700;color:var(--navy)">What's Included:</div>
+    <div>${includes}</div>
+  `;
+  new bootstrap.Modal(document.getElementById('tripModal')).show();
+}
+
+// ─── TOAST ─────────────────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toastMsg');
+  document.getElementById('toastText').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+async function submitContactForm() {
+  const name = document.getElementById('contactName')?.value.trim() || '';
+  const phone = document.getElementById('contactPhone')?.value.trim() || '';
+  const email = document.getElementById('contactEmail')?.value.trim() || '';
+  const tripType = document.getElementById('contactTripType')?.value.trim() || '';
+  const message = document.getElementById('contactMessage')?.value.trim() || '';
+
+  if (!name || !email || !message) {
+    showToast('Please fill in your name, email, and message.');
+    return;
+  }
+
+  try {
+    const response = await fetch('save.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'contact_save',
+        message: { name, phone, email, tripType, message }
+      })
+    });
+
+    const data = await response.json();
+    if (!response.ok || data.error) throw new Error(data.error || 'Request failed');
+
+    ['contactName', 'contactPhone', 'contactEmail', 'contactTripType', 'contactMessage'].forEach((id) => {
+      const field = document.getElementById(id);
+      if (field) field.value = '';
+    });
+    showToast('✅ Your message has been sent successfully.');
+  } catch (error) {
+    showToast(error?.message || 'An error occurred while sending your message.');
+  }
+}
+
+// ─── HERO SLIDER ───────────────────────────────────────────────────────────────
+const HERO_SLIDES = [
+  {
+    badge: "Let's Explore",
+    title: 'Discover Egypt Like Never Before',
+    subtitle: 'Unforgettable journeys through history, culture, and breathtaking landscapes',
+    image: 'https://images.unsplash.com/photo-1539768942893-daf53e448371?auto=format&fit=crop&w=1920&q=80'
+  },
+  {
+    badge: 'Luxury Escapes',
+    title: 'Sail Through Timeless Wonders',
+    subtitle: 'Curated Nile cruises, iconic temples, and elegant stays designed around unforgettable moments',
+    image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?auto=format&fit=crop&w=1920&q=80'
+  },
+  {
+    badge: 'Desert Adventures',
+    title: 'Chase Golden Horizons',
+    subtitle: 'From sweeping dunes to hidden oases, experience Egypt beyond the ordinary',
+    image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1920&q=80'
+  },
+  {
+    badge: 'Historic Cities',
+    title: 'Walk Through Stories of Civilization',
+    subtitle: 'Explore Cairo, Luxor, and Aswan with immersive guided tours full of culture and character',
+    image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1920&q=80'
+  },
+  {
+    badge: 'Red Sea Magic',
+    title: 'Dive Into Crystal-Clear Beauty',
+    subtitle: "Sun-soaked beaches, coral reefs, and premium resorts waiting on Egypt's stunning coastline",
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80'
+  },
+  {
+    badge: 'Tailored Journeys',
+    title: 'Travel Designed Around You',
+    subtitle: 'Flexible itineraries, private transfers, and handcrafted experiences for every kind of traveler',
+    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1920&q=80'
+  }
+];
+
+let heroIndex = 0;
+let heroTimer = null;
+
+function applyHeroSlide(index) {
+  const hero = document.getElementById('heroSection');
+  const badge = document.getElementById('heroBadge');
+  const title = document.getElementById('heroTitle');
+  const subtitle = document.getElementById('heroSubtitle');
+  const dots = document.querySelectorAll('[data-hero-dot]');
+  const slide = HERO_SLIDES[index];
+
+  if (!hero || !badge || !title || !subtitle || !slide) return;
+
+  hero.classList.add('is-transitioning');
+  window.setTimeout(() => {
+    hero.style.backgroundImage = `linear-gradient(rgba(32, 18, 10, 0.34), rgba(32, 18, 10, 0.34)), url('${slide.image}')`;
+    hero.style.backgroundPosition = 'center';
+    hero.style.backgroundSize = 'cover';
+    hero.style.backgroundRepeat = 'no-repeat';
+    badge.textContent = slide.badge;
+    title.textContent = slide.title;
+    subtitle.textContent = slide.subtitle;
+    dots.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === index));
+    hero.classList.remove('is-transitioning');
+  }, 160);
+}
+
+function goToHeroSlide(index) {
+  heroIndex = (index + HERO_SLIDES.length) % HERO_SLIDES.length;
+  applyHeroSlide(heroIndex);
+}
+
+function startHeroAutoplay() {
+  if (heroTimer) clearInterval(heroTimer);
+  heroTimer = setInterval(() => {
+    goToHeroSlide(heroIndex + 1);
+  }, 5000);
+}
+
+function initHeroSlider() {
+  const prev = document.getElementById('heroPrev');
+  const next = document.getElementById('heroNext');
+  const dots = document.querySelectorAll('[data-hero-dot]');
+  const hero = document.getElementById('heroSection');
+
+  if (!hero || !prev || !next || !dots.length) return;
+
+  prev.addEventListener('click', () => {
+    goToHeroSlide(heroIndex - 1);
+    startHeroAutoplay();
+  });
+
+  next.addEventListener('click', () => {
+    goToHeroSlide(heroIndex + 1);
+    startHeroAutoplay();
+  });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      goToHeroSlide(Number(dot.dataset.heroDot));
+      startHeroAutoplay();
+    });
+  });
+
+  hero.addEventListener('mouseenter', () => {
+    if (heroTimer) clearInterval(heroTimer);
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    startHeroAutoplay();
+  });
+
+  applyHeroSlide(heroIndex);
+  startHeroAutoplay();
+}
+
+// ─── STARS ANIMATION ──────────────────────────────────────────────────────────
+function createStars() {
+  const wrap = document.getElementById('heroStars');
+  if (!wrap) return;
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 3 + 1;
+    s.style.cssText = `
+      width:${sz}px;height:${sz}px;
+      top:${Math.random()*100}%;left:${Math.random()*100}%;
+      --d:${Math.random()*4+2}s;
+      animation-delay:${Math.random()*4}s;
+    `;
+    wrap.appendChild(s);
+  }
+}
+
+function initMobileMenuAutoClose() {
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+  if (!mobileMenu || !mobileLinks.length || typeof bootstrap === 'undefined') return;
+
+  const collapse = bootstrap.Collapse.getOrCreateInstance(mobileMenu, { toggle: false });
+  mobileLinks.forEach((link) => {
+    link.addEventListener('click', () => collapse.hide());
+  });
+}
+
+// ─── BACK TO TOP ───────────────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('backTop').classList.toggle('show', window.scrollY > 400);
+});
+
+// ─── COUNTER ANIMATION ────────────────────────────────────────────────────────
+function animateCount(el, target) {
+  let cur = 0;
+  const step = Math.ceil(target / 30);
+  const timer = setInterval(() => {
+    cur = Math.min(cur + step, target);
+    el.textContent = cur + (target > 99 ? '+' : '');
+    if (cur >= target) clearInterval(timer);
+  }, 50);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+$(async function() {
+  initHeroSlider();
+  initMobileMenuAutoClose();
+  createStars();
+  allTrips = await getTrips();
+  renderTrips(allTrips);
+  buildFilterTabs(allTrips);
+  const tripCountEl = document.getElementById('tripCount');
+  if (tripCountEl) animateCount(tripCountEl, allTrips.length);
+
+  // Auto refresh every 30 seconds
+  setInterval(async () => {
+    allTrips = await getTrips();
+    renderTrips(allTrips);
+    buildFilterTabs(allTrips);
+  }, 30000);
+});
+</script>
+</body>
+</html>

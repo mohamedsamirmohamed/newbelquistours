@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | New Belquis Tours</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root {
+      --navy: #13294b;
+      --gold: #d5af47;
+      --gold-soft: #f2dd96;
+      --bg: #edf3ff;
+      --panel: #ffffff;
+      --line: #d9e2f2;
+      --text: #143056;
+      --muted: #7e8faa;
+      --success: #27c98b;
+      --danger: #f24d55;
+      --shadow: 0 18px 48px rgba(17, 39, 76, 0.08);
+      --sidebar-w: 324px;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "Tajawal", sans-serif;
+      background: radial-gradient(circle at top center, rgba(213, 175, 71, 0.08), transparent 24%), linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+    button, input, select, textarea { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    .hidden { display: none !important; }
+    .login-screen {
+      min-height: 100vh; display: grid; place-items: center; padding: 24px;
+      background: radial-gradient(circle at 20% 20%, rgba(213, 175, 71, 0.24), transparent 18%), linear-gradient(135deg, #102441 0%, #18335a 55%, #20406d 100%);
+    }
+    .login-card {
+      width: min(440px, 100%); background: rgba(255, 255, 255, 0.98); border-radius: 32px; padding: 36px; box-shadow: 0 30px 90px rgba(5, 15, 33, 0.35);
+    }
+    .login-badge, .brand-icon {
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft)); color: var(--navy);
+      display: grid; place-items: center; box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.35);
+    }
+    .login-badge { width: 72px; height: 72px; margin: 0 auto 18px; border-radius: 22px; font-size: 30px; font-weight: 900; }
+    .login-card h1 { margin: 0 0 8px; font-size: 32px; text-align: center; font-weight: 900; color: var(--navy); }
+    .login-card p { margin: 0 0 26px; text-align: center; color: var(--muted); font-size: 15px; }
+    .field { margin-bottom: 18px; }
+    .field label, .section-title { display: block; margin-bottom: 8px; font-weight: 900; color: var(--navy); }
+    .field input, .field select, .field textarea {
+      width: 100%; border: 1px solid var(--line); background: #eef4ff; border-radius: 16px; padding: 16px 18px; outline: none; color: var(--text);
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .field textarea { min-height: 150px; resize: vertical; }
+    .field input:focus, .field select:focus, .field textarea:focus, .chip-input:focus-within, .image-dropzone.active {
+      border-color: rgba(213, 175, 71, .8); box-shadow: 0 0 0 4px rgba(213, 175, 71, .12);
+    }
+    .login-error {
+      display: none; margin-bottom: 16px; padding: 14px 16px; border-radius: 14px; background: rgba(242, 77, 85, 0.1); color: #b32029; font-weight: 700;
+    }
+    .btn-primary, .btn-secondary, .btn-filter, .tab-btn, .icon-btn, .plus-btn, .site-btn, .logout-btn, .modal-close, .btn-danger {
+      border: 0; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    }
+    .btn-primary:hover, .btn-secondary:hover, .btn-filter:hover, .tab-btn:hover, .icon-btn:hover, .plus-btn:hover, .site-btn:hover, .logout-btn:hover, .modal-close:hover, .btn-danger:hover { transform: translateY(-1px); }
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; padding: 0 26px; border-radius: 16px;
+      background: var(--navy); color: #fff; font-weight: 900; font-size: 18px; box-shadow: 0 14px 32px rgba(19, 41, 75, 0.18);
+    }
+    .btn-secondary, .site-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 24px; border-radius: 16px;
+      background: #fff; color: var(--navy); font-weight: 800; font-size: 18px; border: 1px solid var(--line);
+    }
+    #app { display: none; }
+    .layout { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: var(--sidebar-w); background: linear-gradient(180deg, #162c50 0%, #132546 100%); color: #fff; padding: 28px 22px; display: flex; flex-direction: column; gap: 22px;
+      box-shadow: -10px 0 30px rgba(8, 19, 38, 0.1);
+    }
+    .sidebar-head, .admin-foot, .topbar, .toolbar, .filters, .trip-actions, .schedule-header, .confirm-actions, .modal-footer, .tab-bar, .topbar-actions, .side-link, .switch-row, .checkbox-row, .trip-meta, .chip-input, .search-wrap, .trip-card, .stat-top, .day-card-head {
+      display: flex; align-items: center;
+    }
+    .sidebar-head, .admin-foot, .topbar, .schedule-header, .day-card-head { justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      font-size: 0;
+      overflow: hidden;
+      background-image: url('image/cropped-logo-fav-icon.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .brand h2, .modal-title, .trip-name, .settings-card h3, .confirm-box h3, .empty-state h3, .page-title h1 { margin: 0; font-weight: 900; }
+    .brand h2 { font-size: 20px; color: #fff; }
+    .brand p { margin: 4px 0 0; font-size: 13px; color: #d0d9e8; font-weight: 700; }
+    .side-section { color: rgba(255,255,255,.35); font-size: 14px; font-weight: 800; margin: 8px 0 2px; padding: 0 12px; }
+    .side-nav { display: flex; flex-direction: column; gap: 10px; }
+    .side-link {
+      min-height: 70px; border-radius: 18px; justify-content: space-between; padding: 0 18px; color: #8fb8ff; background: transparent; font-size: 18px; font-weight: 800; border: 1px solid transparent;
+    }
+    .side-link.active { background: rgba(255,255,255,.1); color: #ffcf5d; }
+    .side-link span { display: inline-flex; align-items: center; gap: 10px; }
+    .admin-foot { margin-top: auto; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.08); gap: 12px; }
+    .admin-meta strong { display: block; font-size: 16px; font-weight: 900; margin-bottom: 4px; }
+    .admin-meta span { color: #9db1d1; font-size: 14px; font-weight: 700; }
+    .avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #f8d977, var(--gold)); color: var(--navy); display: grid; place-items: center; font-size: 30px; font-weight: 900; flex: none; }
+    .logout-btn { width: 44px; height: 44px; border-radius: 14px; background: rgba(255,255,255,.06); color: #fff; border: 1px solid rgba(255,255,255,.14); font-size: 18px; }
+    .content { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .topbar {
+      gap: 20px; padding: 18px 36px; background: rgba(255,255,255,.82); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(217,226,242,.9); position: sticky; top: 0; z-index: 10;
+    }
+    .page-title h1 { font-size: 32px; color: var(--navy); }
+    .page-title p { margin: 6px 0 0; font-size: 17px; color: var(--muted); }
+    .topbar-actions, .toolbar, .filters, .trip-actions, .confirm-actions, .modal-footer, .tab-bar, .trip-meta { gap: 12px; }
+    .page { display: none; padding: 26px 36px 34px; }
+    .page.active, .tab-panel.active, .modal-shell.show { display: block; }
+    .dashboard-grid, .settings-grid, .grid-2, .grid-3, .trip-list, .message-list { display: grid; gap: 18px; }
+    .dashboard-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 18px; }
+    .settings-grid, .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .stat-card, .settings-card, .trip-card, .price-card, .gallery-item, .confirm-box { background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .stat-card {
+      min-height: 124px; border-radius: 20px; padding: 22px 24px; position: relative; overflow: hidden;
+    }
+    .stat-card::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 5px; border-radius: 5px; background: var(--gold); }
+    .stat-card.success::after { background: var(--success); }
+    .stat-card.danger::after { background: var(--danger); }
+    .stat-card.warning::after { background: #f0a11f; }
+    .stat-value { font-size: 44px; font-weight: 900; line-height: 1; color: var(--navy); }
+    .stat-label { font-size: 22px; color: #677d9b; font-weight: 700; }
+    .stat-icon { font-size: 36px; }
+    .btn-filter { min-width: 74px; height: 56px; padding: 0 18px; border-radius: 14px; background: #fff; color: #6e85a5; border: 1px solid var(--line); font-size: 18px; font-weight: 900; }
+    .btn-filter.active { background: var(--gold); color: var(--navy); border-color: transparent; }
+    .search-wrap {
+      flex: 1; min-width: 260px; height: 58px; border-radius: 18px; background: #fff; border: 1px solid var(--line); padding: 0 18px; gap: 14px;
+    }
+    .search-wrap i { color: #5576aa; font-size: 24px; }
+    .search-wrap input { border: 0; outline: none; background: transparent; width: 100%; font-size: 20px; color: var(--text); }
+    .state-shell { background: rgba(245,248,255,.7); border: 1px solid rgba(217,226,242,.9); border-radius: 26px; min-height: 460px; padding: 24px; box-shadow: inset 0 1px 0 rgba(255,255,255,.8); }
+    .empty-state { min-height: 420px; display: grid; place-items: center; text-align: center; color: var(--muted); }
+    .empty-state .icon { font-size: 74px; margin-bottom: 18px; }
+    .empty-state h3 { margin-bottom: 12px; color: var(--navy); font-size: 52px; }
+    .empty-state p { margin: 0 0 18px; font-size: 20px; }
+    .trip-list { gap: 16px; }
+    .trip-card { border-radius: 22px; padding: 18px; grid-template-columns: 124px minmax(0, 1fr) auto; gap: 18px; }
+    .trip-thumb { width: 124px; height: 94px; object-fit: cover; border-radius: 18px; background: #dce6f8; }
+    .trip-name { margin: 0 0 10px; font-size: 24px; color: var(--navy); }
+    .trip-meta { flex-wrap: wrap; color: #6f83a2; font-size: 16px; font-weight: 700; gap: 10px; }
+    .tag, .chip {
+      display: inline-flex; align-items: center; gap: 6px; background: #edf3ff; border: 1px solid var(--line); color: #5b759d; padding: 8px 12px; border-radius: 999px; font-size: 14px; font-weight: 800;
+    }
+    .tag.active { color: #0f6d4d; background: rgba(39, 201, 139, .12); border-color: rgba(39, 201, 139, .24); }
+    .icon-btn { width: 48px; height: 48px; border-radius: 14px; background: #eef4ff; color: var(--navy); font-size: 20px; border: 1px solid var(--line); }
+    .icon-btn.delete, .btn-danger { background: rgba(242, 77, 85, .1); color: #b5252d; border-color: rgba(242, 77, 85, .2); }
+    .settings-card { border-radius: 24px; padding: 24px; }
+    .settings-card h3 { font-size: 24px; color: var(--navy); margin-bottom: 22px; }
+    .switch-row { justify-content: space-between; gap: 14px; padding: 14px 0; border-bottom: 1px solid #edf1f7; }
+    .switch-row:last-child { border-bottom: 0; }
+    .switch-row strong { display: block; margin-bottom: 4px; font-size: 17px; }
+    .switch-row span { color: var(--muted); font-size: 14px; }
+    .switch { width: 56px; height: 32px; border-radius: 999px; background: #d5ddec; position: relative; cursor: pointer; flex: none; }
+    .switch input { display: none; }
+    .switch::after { content: ""; position: absolute; top: 4px; right: 4px; width: 24px; height: 24px; border-radius: 50%; background: #fff; transition: transform .18s ease; box-shadow: 0 2px 8px rgba(17, 39, 76, 0.15); }
+    .switch.checked { background: rgba(39,201,139,.5); }
+    .switch.checked::after { transform: translateX(-24px); }
+    .modal-shell {
+      position: fixed; inset: 0; background: rgba(15,25,42,.45); backdrop-filter: blur(8px); display: none; padding: 16px; z-index: 999; overflow: auto;
+    }
+    .trip-modal {
+      width: min(980px, calc(100vw - 24px)); max-height: calc(100vh - 24px); margin: auto; background: #fff; border-radius: 28px; overflow: hidden; box-shadow: 0 34px 80px rgba(12, 25, 46, 0.25); display: flex; flex-direction: column;
+    }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 28px 30px; border-bottom: 1px solid #edf1f7; background: #fff; }
+    .modal-title { font-size: 24px; color: var(--navy); }
+    .modal-close { width: 44px; height: 44px; border-radius: 50%; background: #f1f5fd; color: var(--navy); font-size: 28px; line-height: 1; }
+    .tab-bar { flex-wrap: wrap; gap: 12px; background: #eef3fb; padding: 16px 28px; border-bottom: 1px solid #dde6f4; }
+    .tab-btn { min-height: 50px; padding: 0 18px; border-radius: 14px; background: transparent; color: #7184a4; font-size: 18px; font-weight: 900; }
+    .tab-btn.active { background: #fff; color: #a57b19; box-shadow: var(--shadow); }
+    .modal-body { padding: 28px; overflow: auto; background: #fff; }
+    .tab-panel { display: none; }
+    .section-title { margin: 0 0 18px; font-size: 18px; }
+    .image-dropzone {
+      border: 2px dashed rgba(213,175,71,.9); background: #fff9eb; border-radius: 20px; min-height: 160px; display: grid; place-items: center; text-align: center; padding: 20px; color: #7f87a0; position: relative; overflow: hidden;
+    }
+    .image-dropzone.has-image { background-size: cover; background-position: center; border-style: solid; border-color: #d5e0f2; color: transparent; }
+    .image-dropzone.has-image::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(17,39,76,.08), rgba(17,39,76,.3)); }
+    .image-dropzone > div { position: relative; z-index: 1; }
+    .drop-icon { font-size: 40px; margin-bottom: 10px; display: block; color: #7d7290; }
+    .drop-sub { margin-top: 8px; font-size: 14px; color: var(--muted); }
+    .checkbox-row { justify-content: space-between; gap: 16px; border: 1px solid var(--line); background: #eef4ff; border-radius: 16px; padding: 16px 18px; }
+    .checkbox-row span { font-size: 18px; font-weight: 800; color: var(--navy); }
+    .checkbox-row input { width: 22px; height: 22px; accent-color: var(--success); }
+    .chip-input { align-items: stretch; gap: 10px; border: 1px solid var(--line); background: #fff; border-radius: 16px; padding: 10px; margin-bottom: 14px; }
+    .chip-input input { flex: 1; border: 0; outline: none; min-width: 0; padding: 10px 12px; background: #eef4ff; border-radius: 12px; }
+    .plus-btn { width: 44px; height: 44px; border-radius: 12px; background: var(--gold); color: var(--navy); font-size: 28px; font-weight: 900; flex: none; }
+    .chips-box, .schedule-box, .gallery-list { min-height: 86px; border: 1px solid var(--line); background: #eef4ff; border-radius: 18px; padding: 16px; display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
+    .chips-box.empty, .schedule-box.empty, .gallery-list.empty { display: grid; place-items: center; color: var(--muted); font-size: 16px; text-align: center; }
+    .chip button { border: 0; background: transparent; color: #8aa0bf; cursor: pointer; font-size: 18px; line-height: 1; }
+    .price-card { border-radius: 22px; padding: 22px; text-align: center; background: #eef4ff; }
+    .price-card .icon { font-size: 34px; margin-bottom: 12px; display: block; }
+    .price-card strong { display: block; font-size: 22px; color: var(--navy); margin-bottom: 16px; }
+    .price-card input { border: 1px solid var(--line); background: #fff; border-radius: 16px; padding: 16px; text-align: center; font-size: 22px; font-weight: 900; color: #6a7380; width: 100%; }
+    .schedule-header { margin-bottom: 18px; }
+    .day-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px; width: 100%; }
+    .day-card strong { font-size: 18px; color: var(--navy); }
+    .day-card textarea { min-height: 90px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; width: 100%; }
+    .gallery-item { border-radius: 18px; overflow: hidden; }
+    .gallery-item img { width: 100%; height: 130px; object-fit: cover; display: block; background: #dce6f8; }
+    .gallery-item footer { padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .gallery-item span { color: var(--muted); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .modal-footer { justify-content: flex-start; padding: 18px 28px 22px; background: #eef3fb; border-top: 1px solid #dde6f4; position: sticky; bottom: 0; }
+    .message-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 20px 22px;
+      box-shadow: var(--shadow);
+    }
+    .message-head, .message-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .message-head h3 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .message-date, .message-meta {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .message-body {
+      margin-top: 14px;
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+    .message-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .toast {
+      position: fixed; top: 18px; left: 50%; transform: translateX(-50%); background: var(--navy); color: #fff; border-radius: 16px; padding: 14px 18px; display: none; z-index: 2000;
+      box-shadow: 0 18px 42px rgba(17,39,76,.2); font-weight: 800;
+    }
+    .toast.show { display: block; }
+    .confirm-box { width: min(420px, calc(100vw - 24px)); border-radius: 24px; padding: 24px; margin: 80px auto; }
+    .confirm-box h3 { margin: 0 0 10px; font-size: 26px; color: #b32029; }
+    .confirm-box p { margin: 0 0 20px; color: var(--muted); font-size: 16px; }
+    .btn-danger { min-height: 54px; padding: 0 22px; border-radius: 16px; font-size: 18px; font-weight: 900; }
+    @media (max-width: 1280px) { .dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 980px) {
+      .layout { flex-direction: column; }
+      .sidebar { width: 100%; }
+      .topbar, .page { padding-left: 20px; padding-right: 20px; }
+      .settings-grid, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .trip-card { grid-template-columns: 1fr; }
+      .trip-thumb { width: 100%; height: 180px; }
+      .state-shell { min-height: auto; }
+      .topbar { position: static; }
+      .admin-foot { margin-top: 12px; }
+    }
+    @media (max-width: 720px) {
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .topbar, .toolbar, .filters, .tab-bar, .modal-footer, .confirm-actions, .topbar-actions { flex-wrap: wrap; }
+      .topbar { flex-direction: column; align-items: stretch; }
+      .btn-primary, .btn-secondary, .site-btn { width: 100%; }
+      .trip-modal { width: 100%; max-height: calc(100vh - 12px); border-radius: 22px; }
+      .sidebar { padding: 20px 16px; gap: 16px; }
+      .side-link { min-height: 56px; font-size: 16px; padding: 0 14px; }
+      .page { padding: 18px 14px 24px; }
+      .topbar { padding: 16px 14px; gap: 14px; }
+      .page-title h1 { font-size: 24px; }
+      .page-title p { font-size: 14px; }
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .filters { width: 100%; }
+      .btn-filter { flex: 1; min-width: 0; height: 48px; font-size: 15px; }
+      .search-wrap { min-width: 0; width: 100%; height: 50px; }
+      .search-wrap input { font-size: 16px; }
+      .state-shell { padding: 16px; border-radius: 18px; }
+      .empty-state { min-height: 280px; }
+      .empty-state h3 { font-size: 34px; }
+      .empty-state p { font-size: 16px; }
+      .message-card,
+      .settings-card,
+      .price-card { padding: 18px; border-radius: 18px; }
+      .message-head h3 { font-size: 20px; }
+      .message-body { font-size: 15px; }
+      .trip-card { padding: 14px; border-radius: 18px; }
+      .trip-name { font-size: 20px; }
+      .trip-meta { font-size: 14px; }
+      .modal-header,
+      .modal-body,
+      .modal-footer,
+      .tab-bar { padding-left: 16px; padding-right: 16px; }
+      .modal-header { padding-top: 18px; padding-bottom: 18px; }
+      .modal-body { padding-top: 18px; padding-bottom: 18px; }
+      .modal-title { font-size: 20px; }
+      .tab-btn { min-height: 44px; font-size: 15px; padding: 0 14px; }
+      .checkbox-row { padding: 14px; }
+      .checkbox-row span { font-size: 16px; }
+      .price-card strong { font-size: 18px; }
+      .price-card input { font-size: 18px; padding: 14px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .confirm-box { margin: 40px auto; padding: 20px; }
+      .confirm-box h3 { font-size: 22px; }
+      .confirm-box p { font-size: 15px; }
+      .btn-danger { width: 100%; min-height: 48px; font-size: 16px; }
+    }
+    @media (max-width: 480px) {
+      .login-screen { padding: 16px; }
+      .login-card { padding: 24px 18px; border-radius: 22px; }
+      .login-card h1 { font-size: 26px; }
+      .login-card p { font-size: 14px; }
+      .login-badge { width: 60px; height: 60px; border-radius: 18px; }
+      .brand h2 { font-size: 18px; }
+      .brand p { font-size: 12px; }
+      .dashboard-grid { gap: 14px; }
+      .stat-card { min-height: 100px; padding: 18px; border-radius: 16px; }
+      .stat-value { font-size: 34px; }
+      .stat-label { font-size: 18px; }
+      .stat-icon { font-size: 28px; }
+      .topbar-actions,
+      .filters,
+      .message-actions,
+      .confirm-actions,
+      .trip-actions { width: 100%; }
+      .filters { gap: 8px; }
+      .tag, .chip { font-size: 12px; padding: 6px 10px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item img { height: 180px; }
+      .modal-shell { padding: 8px; }
+      .trip-modal { max-height: calc(100vh - 8px); border-radius: 18px; }
+      .modal-footer { padding-bottom: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="login-badge">🏺</div>
+      <h1>Admin Dashboard</h1>
+      <p>Sign in to manage tours, update itineraries, photos, and pricing.</p>
+      <div class="login-error" id="loginError">Invalid username or password.</div>
+      <div class="field">
+        <label for="loginUser">Username</label>
+        <input id="loginUser" type="text" value="admin" placeholder="admin">
+      </div>
+      <div class="field">
+        <label for="loginPass">Password</label>
+        <input id="loginPass" type="password" value="1234" placeholder="1234">
+      </div>
+      <button class="btn-primary" style="width:100%" onclick="doLogin()"><i class="bi bi-shield-lock-fill"></i> Login</button>
+    </div>
+  </div>
+
+  <div id="app">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-head">
+          <div class="brand">
+            <div class="brand-icon">🏺</div>
+            <div>
+              <h2>New Belquis Tours</h2>
+              <p>Admin Dashboard</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-section">Main</div>
+        <nav class="side-nav">
+          <a class="side-link active" data-page="dashboard" href="#" onclick="showPage('dashboard'); return false;"><span>🗺️ Tour Management</span></a>
+        </nav>
+
+        <nav class="side-nav">
+          <a class="side-link" data-page="messages" href="#" onclick="openMessagesPage(); return false;"><span>Contact Messages</span></a>
+        </nav>
+
+        <div class="side-section">Contact Settings</div>
+        <nav class="side-nav">
+          <a class="side-link" data-page="settings" href="#" onclick="showPage('settings'); return false;"><span>⚙️ Contact Settings</span></a>
+        </nav>
+
+        <div class="side-section">Links</div>
+        <nav class="side-nav">
+          <a class="side-link" href="index.html" target="_blank"><span>🌐 View Website</span></a>
+        </nav>
+
+        <div class="admin-foot">
+          <div class="admin-meta"><strong>Admin</strong><span>System Administrator</span></div>
+          <div class="avatar">A</div>
+          <button class="logout-btn" onclick="doLogout()" title="Log out"><i class="bi bi-box-arrow-left"></i></button>
+        </div>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <div class="page-title">
+            <h1 id="pageTitle">Tour Management السياحية</h1>
+            <p id="pageSubtitle">Add, edit, and manage travel programs</p>
+          </div>
+          <div class="topbar-actions">
+            <a class="site-btn" href="index.html" target="_blank"><i class="bi bi-globe2"></i> View Website</a>
+          </div>
+        </header>
+
+        <section class="page active" id="page-dashboard">
+          <div class="dashboard-grid">
+            <article class="stat-card"><div class="stat-top"><div class="stat-value" id="statTrips">0</div><div class="stat-icon">🗺️</div></div><div class="stat-label">Total Tours</div></article>
+            <article class="stat-card success"><div class="stat-top"><div class="stat-value" id="statActive">0</div><div class="stat-icon">✅</div></div><div class="stat-label">Active Tours</div></article>
+            <article class="stat-card danger"><div class="stat-top"><div class="stat-value" id="statInactive">0</div><div class="stat-icon">⏸️</div></div><div class="stat-label">Inactive Tours</div></article>
+            <article class="stat-card warning"><div class="stat-top"><div class="stat-value" id="statMessages">0</div><div class="stat-icon">📨</div></div><div class="stat-label">Inbox Messages</div></article>
+          </div>
+
+          <div class="toolbar">
+            <button class="btn-primary" onclick="openAddModal()"><i class="bi bi-plus-lg"></i> Add New Tour</button>
+            <div class="filters">
+              <button class="btn-filter active" data-filter="all" onclick="setStatusFilter('all')">All</button>
+              <button class="btn-filter" data-filter="active" onclick="setStatusFilter('active')">Active</button>
+              <button class="btn-filter" data-filter="inactive" onclick="setStatusFilter('inactive')">Inactive</button>
+            </div>
+            <div class="search-wrap"><i class="bi bi-search"></i><input id="searchInput" type="text" placeholder="Search tours..." oninput="renderTrips()"></div>
+          </div>
+
+          <div class="state-shell" id="dashboardShell">
+            <div class="empty-state" id="emptyState">
+              <div>
+                <div class="icon">🏺</div>
+                <h3>No Tours Found</h3>
+                <p>ابدأ بAdd New Tour</p>
+                <button class="btn-primary" onclick="openAddModal()"><i class="bi bi-plus-lg"></i> Add Tour</button>
+              </div>
+            </div>
+            <div class="trip-list hidden" id="tripList"></div>
+          </div>
+        </section>
+
+        <section class="page" id="page-messages">
+          <div class="state-shell">
+            <div class="empty-state" id="messagesEmptyState">
+              <div>
+                <div class="icon">📨</div>
+                <h3>No Messages Yet</h3>
+                <p>New contact form submissions will appear here.</p>
+              </div>
+            </div>
+            <div class="message-list hidden" id="messageList"></div>
+          </div>
+        </section>
+
+        <section class="page" id="page-settings">
+          <div class="settings-grid">
+            <article class="settings-card">
+              <h3>بيانات الLogin</h3>
+              <div class="field"><label for="settUser">Username</label><input id="settUser" type="text" value="admin"></div>
+              <div class="field"><label for="settPass">New Password</label><input id="settPass" type="password" placeholder="Leave blank to keep the current password"></div>
+              <button class="btn-primary" onclick="saveSettings()"><i class="bi bi-floppy2-fill"></i> Save Settings</button>
+            </article>
+
+            <article class="settings-card">
+              <h3>Display Options</h3>
+              <div class="switch-row"><div><strong>Show Featured Tours</strong><span>عرض الرحلات الFeatured في الصفحة Main</span></div><label class="switch checked" onclick="toggleSwitch(this)"><input type="checkbox" checked></label></div>
+              <div class="switch-row"><div><strong>Show Hot Deals</strong><span>Highlight limited-time or fast-selling tours</span></div><label class="switch checked" onclick="toggleSwitch(this)"><input type="checkbox" checked></label></div>
+              <div class="switch-row"><div><strong>Enable Direct Booking</strong><span>Allow direct booking buttons on the website</span></div><label class="switch checked" onclick="toggleSwitch(this)"><input type="checkbox" checked></label></div>
+              <div style="margin-top:22px"><button class="btn-secondary" onclick="resetData()">Reset Data</button></div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div class="modal-shell" id="tripModal">
+    <div class="trip-modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="tripModalTitle">✨ Add New Tour</h2>
+        <button class="modal-close" onclick="closeTripModal()">×</button>
+      </div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="basic" onclick="switchTripTab('basic')">📋 Basic Information</button>
+        <button class="tab-btn" data-tab="prices" onclick="switchTripTab('prices')">💰 Pricing</button>
+        <button class="tab-btn" data-tab="includes" onclick="switchTripTab('includes')">✅ Includes / Excludes</button>
+        <button class="tab-btn" data-tab="schedule" onclick="switchTripTab('schedule')">🗺️ Daily Itinerary</button>
+        <button class="tab-btn" data-tab="photos" onclick="switchTripTab('photos')">🖼️ Photos</button>
+      </div>
+
+      <div class="modal-body">
+        <input type="hidden" id="tripId">
+
+        <div class="tab-panel active" id="tab-basic">
+          <div class="field"><label for="fTitle">Tour Name *</label><input id="fTitle" type="text" placeholder="Example: Cairo Luxor Aswan Economy"></div>
+          <div class="grid-2">
+            <div class="field"><label for="fDest">Destination</label><input id="fDest" type="text" placeholder="Cairo, Luxor, Aswan"></div>
+            <div class="field"><label for="fDuration">Duration</label><input id="fDuration" type="text" placeholder="8 Days - 7 Nights"></div>
+          </div>
+          <div class="grid-2">
+            <div class="field"><label for="fSeats">Group Size</label><input id="fSeats" type="text" placeholder="2-15"></div>
+            <div class="field">
+              <label for="fCat">Tour Type</label>
+              <select id="fCat">
+                <option value="Economy">Economy</option>
+                <option value="Cultural">Cultural</option>
+                <option value="Beach">Beach</option>
+                <option value="Luxury">Luxury</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Family">Family</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="field"><label for="fRating">Rating (1-5)</label><input id="fRating" type="number" min="1" max="5" step="0.1" placeholder="4.8"></div>
+          </div>
+          <div class="field">
+            <label>Photosة Main</label>
+            <div class="image-dropzone" id="mainImageDropzone" onclick="document.getElementById('mainImageFile').click()">
+              <div>
+                <span class="drop-icon">📷</span>
+                <div>Click to choose a main image</div>
+                <div class="drop-sub">Uploaded files are converted automatically into web-ready image links.</div>
+                <div class="drop-sub">أو الصق رابط Photosة بالأسفل</div>
+              </div>
+            </div>
+            <input id="mainImageFile" type="file" accept="image/*" class="hidden" onchange="handleMainImageFile(event)">
+          </div>
+          <div class="field"><label for="fImage">رابط Photosة Main</label><input id="fImage" type="text" placeholder="https://example.com/cover.jpg" oninput="syncMainImagePreview()"></div>
+          <div class="field"><label for="fDesc">Trip Overview</label><textarea id="fDesc" placeholder="A complete trip description..."></textarea></div>
+          <div class="grid-2">
+            <div class="checkbox-row"><span>Active</span><input id="fStatus" type="checkbox" checked></div>
+            <div class="checkbox-row"><span>Featured Tour</span><input id="fFeatured" type="checkbox"></div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-prices">
+          <div class="grid-3">
+            <div class="price-card"><span class="icon">🏨</span><strong>($) Single Room</strong><input id="fSinglePrice" type="number" placeholder="2740"></div>
+            <div class="price-card"><span class="icon">🛏️</span><strong>($) Double Room</strong><input id="fDoublePrice" type="number" placeholder="1815"></div>
+            <div class="price-card"><span class="icon">👥</span><strong>($) Triple Room</strong><input id="fTriplePrice" type="number" placeholder="1640"></div>
+          </div>
+          <div class="grid-2" style="margin-top:18px">
+            <div class="field"><label for="fPrice">Base Price</label><input id="fPrice" type="number" placeholder="1500"></div>
+            <div class="field"><label for="fOldPrice">Price Before Discount</label><input id="fOldPrice" type="number" placeholder="1800"></div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-includes">
+          <div class="grid-2">
+            <div>
+              <h3 class="section-title">✅ يشمل (Includes)</h3>
+              <div class="chip-input"><button class="plus-btn" onclick="addListItem('includes')">+</button><input id="includeInput" type="text" placeholder="Type and press Enter"></div>
+              <div class="chips-box empty" id="includesBox">No included items yet</div>
+            </div>
+            <div>
+              <h3 class="section-title">❌ لا يشمل (Excludes)</h3>
+              <div class="chip-input"><button class="plus-btn" onclick="addListItem('excludes')">+</button><input id="excludeInput" type="text" placeholder="Type and press Enter"></div>
+              <div class="chips-box empty" id="excludesBox">No excluded items yet</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-schedule">
+          <div class="schedule-header">
+            <h3 class="section-title" style="margin:0">Daily Itinerary</h3>
+            <button class="btn-primary" style="min-height:52px;font-size:16px" onclick="addScheduleDay()"><i class="bi bi-plus-lg"></i> Add Day</button>
+          </div>
+          <div class="schedule-box empty" id="scheduleBox">لا يوجد أيام مضافة - اضغط "+ Add Day"</div>
+        </div>
+
+        <div class="tab-panel" id="tab-photos">
+          <div class="field">
+            <div class="image-dropzone" id="galleryDropzone" onclick="document.getElementById('galleryFile').click()">
+              <div>
+                <span class="drop-icon">📷</span>
+                <div style="font-size:20px;font-weight:900;color:var(--navy)">Upload Program Photos</div>
+                <div class="drop-sub">Any uploaded image here is stored automatically as a web-ready link.</div>
+                <div class="drop-sub">اسحب Photos هنا أو اضغط للاختيار</div>
+                <button class="btn-primary" type="button" style="min-height:50px;font-size:16px;margin-top:18px">+ Choose Photos</button>
+              </div>
+            </div>
+            <input id="galleryFile" type="file" accept="image/*" multiple class="hidden" onchange="handleGalleryFiles(event)">
+          </div>
+          <div class="field"><label for="galleryUrlInput">Add Image by URL</label><div class="chip-input"><button class="plus-btn" onclick="addGalleryUrl()">+</button><input id="galleryUrlInput" type="text" placeholder="https://example.com/photo.jpg"></div></div>
+          <div class="gallery-list empty" id="galleryList">لا توجد صور للبرنامج - اUpload Program Photos من الأعلى</div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-primary" onclick="saveTrip()"><i class="bi bi-floppy2-fill"></i> Save Tour</button>
+        <button class="btn-secondary" onclick="closeTripModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-shell" id="delModal">
+    <div class="confirm-box">
+      <h3>Delete Confirmation</h3>
+      <p>Are you sure you want to delete this tour? This action cannot be undone.</p>
+      <div class="confirm-actions">
+        <button class="btn-danger" onclick="confirmDelete()">Delete</button>
+        <button class="btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-shell" id="messageDeleteModal">
+    <div class="confirm-box">
+      <h3>Delete Message</h3>
+      <p>Are you sure you want to delete this message?</p>
+      <div class="confirm-actions">
+        <button class="btn-danger" onclick="confirmMessageDelete()">Yes</button>
+        <button class="btn-secondary" onclick="closeMessageDeleteModal()">No</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const CREDS = { user: "admin", pass: "1234" };
+    let currentCreds = { ...CREDS };
+    let appInitialized = false;
+    let tripsCache = [];
+    let messagesCache = [];
+    let editId = null;
+    let deleteId = null;
+    let messageDeleteId = null;
+    let currentStatusFilter = "all";
+    let formState = { includes: [], excludes: [], schedule: [], gallery: [] };
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+    async function postAdminAction(payload) {
+      const response = await fetch("save.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        cache: "no-store",
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json().catch(() => ({ error: "Invalid server response" }));
+      if (!response.ok && !(result && result.error)) result.error = `Request failed with status ${response.status}`;
+      return result;
+    }
+
+    async function getAuthStatus() {
+      const response = await fetch("save.php?action=auth_status", {
+        credentials: "same-origin",
+        cache: "no-store"
+      });
+      return response.json();
+    }
+
+    async function getTrips() {
+      try {
+        const response = await fetch("save.php", {
+          credentials: "same-origin",
+          cache: "no-store"
+        });
+        tripsCache = await response.json();
+        return tripsCache;
+      } catch (error) {
+        return tripsCache;
+      }
+    }
+
+    async function saveTripToServer(trip) { return postAdminAction({ action: "save", trip }); }
+
+    async function deleteTripFromServer(id) { return postAdminAction({ action: "delete", id }); }
+
+    async function resetTripsOnServer() { return postAdminAction({ action: "reset" }); }
+    async function getContactMessages() {
+      const response = await fetch("save.php?action=contact_get", {
+        credentials: "same-origin",
+        cache: "no-store"
+      });
+      return response.json();
+    }
+    async function deleteContactMessageFromServer(id) {
+      let response = await fetch(`save.php?action=contact_delete&id=${encodeURIComponent(id)}`, {
+        credentials: "same-origin",
+        cache: "no-store"
+      });
+      let result = await response.json().catch(() => ({ error: "Invalid server response" }));
+      if (response.ok && !(result && result.error)) return result;
+
+      return postAdminAction({ action: "contact_delete", id });
+    }
+
+    function genId() { return "trip_" + Date.now() + "_" + Math.floor(Math.random() * 1000); }
+    function splitCSV(value) { return (value || "").split(",").map((item) => item.trim()).filter(Boolean); }
+    function decodeMaybeBroken(text) {
+      if (typeof text !== "string") return text;
+      try { if (/Ã|Ø|Ù/.test(text)) return decodeURIComponent(escape(text)); } catch (error) { return text; }
+      return text;
+    }
+    function normalizeTrip(raw) {
+      const trip = { ...raw };
+      trip.title = decodeMaybeBroken(trip.title || "");
+      trip.destination = decodeMaybeBroken(trip.destination || "");
+      trip.category = decodeMaybeBroken(trip.category || "");
+      trip.description = decodeMaybeBroken(trip.description || "");
+      trip.includes = decodeMaybeBroken(trip.includes || "");
+      trip.status = typeof trip.status === "boolean" ? trip.status : true;
+      trip.excludesList = Array.isArray(trip.excludesList) ? trip.excludesList.map(decodeMaybeBroken) : [];
+      trip.includesList = Array.isArray(trip.includesList) ? trip.includesList.map(decodeMaybeBroken) : splitCSV(trip.includes);
+      trip.schedule = Array.isArray(trip.schedule) ? trip.schedule : [];
+      trip.gallery = Array.isArray(trip.gallery) ? trip.gallery : [];
+      trip.singlePrice = trip.singlePrice || "";
+      trip.doublePrice = trip.doublePrice || "";
+      trip.triplePrice = trip.triplePrice || "";
+      return trip;
+    }
+    function showToast(message, timeout = 2600) {
+      const toast = $("#toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => toast.classList.remove("show"), timeout);
+    }
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+    function showLoggedInApp() {
+      $("#loginScreen").style.display = "none";
+      $("#app").style.display = "block";
+    }
+    function showLoginScreen() {
+      $("#app").style.display = "none";
+      $("#loginScreen").style.display = "grid";
+    }
+    async function doLogin() {
+      const user = $("#loginUser").value.trim();
+      const pass = $("#loginPass").value;
+      const result = await postAdminAction({ action: "auth_login", user, pass });
+      if (result && result.success) {
+        currentCreds.user = result.user || user;
+        $("#loginError").style.display = "none";
+        showLoggedInApp();
+        await initApp();
+      } else {
+        $("#loginError").style.display = "block";
+        setTimeout(() => $("#loginError").style.display = "none", 2500);
+      }
+    }
+    async function doLogout() {
+      await postAdminAction({ action: "auth_logout" });
+      showLoginScreen();
+    }
+    function openMessagesPage() {
+      $$(".page").forEach((page) => page.classList.remove("active"));
+      $("#page-messages").classList.add("active");
+      $$(".side-link[data-page]").forEach((link) => link.classList.toggle("active", link.dataset.page === "messages"));
+      $("#pageTitle").textContent = "Contact Messages";
+      $("#pageSubtitle").textContent = "Review messages submitted from the website contact form";
+      renderMessages();
+    }
+    function showPage(name) {
+      $$(".page").forEach((page) => page.classList.remove("active"));
+      $("#page-" + name).classList.add("active");
+      $$(".side-link[data-page]").forEach((link) => link.classList.toggle("active", link.dataset.page === name));
+      if (name === "dashboard") {
+        $("#pageTitle").textContent = "Tour Management السياحية";
+        $("#pageSubtitle").textContent = "Add, edit, and manage travel programs";
+        renderTrips();
+      } else {
+        $("#pageTitle").textContent = "Contact Settings";
+        $("#pageSubtitle").textContent = "إدارة بيانات الLogin وDisplay Options";
+      }
+    }
+    function bindInputHelpers() {
+      $("#includeInput").addEventListener("keydown", (event) => { if (event.key === "Enter") { event.preventDefault(); addListItem("includes"); } });
+      $("#excludeInput").addEventListener("keydown", (event) => { if (event.key === "Enter") { event.preventDefault(); addListItem("excludes"); } });
+      $("#galleryUrlInput").addEventListener("keydown", (event) => { if (event.key === "Enter") { event.preventDefault(); addGalleryUrl(); } });
+    }
+    async function initApp() {
+      $("#settUser").value = currentCreds.user;
+      if (!appInitialized) {
+        bindInputHelpers();
+        appInitialized = true;
+      }
+      await refreshAll();
+    }
+    async function refreshAll() {
+      const trips = (await getTrips()).map(normalizeTrip);
+      tripsCache = trips;
+      messagesCache = await getContactMessages();
+      updateStats(trips, messagesCache);
+      renderTrips();
+      renderMessages();
+    }
+    function updateStats(trips, messages) {
+      const active = trips.filter((trip) => trip.status !== false).length;
+      const inactive = trips.length - active;
+      $("#statTrips").textContent = trips.length;
+      $("#statActive").textContent = active;
+      $("#statInactive").textContent = inactive;
+      $("#statMessages").textContent = Array.isArray(messages) ? messages.length : 0;
+    }
+    function renderMessages() {
+      const emptyState = $("#messagesEmptyState");
+      const messageList = $("#messageList");
+      if (!emptyState || !messageList) return;
+      if (!messagesCache.length) {
+        emptyState.classList.remove("hidden");
+        messageList.classList.add("hidden");
+        messageList.innerHTML = "";
+        return;
+      }
+      emptyState.classList.add("hidden");
+      messageList.classList.remove("hidden");
+      messageList.innerHTML = messagesCache.map((item) => `
+        <article class="message-card">
+          <div class="message-head">
+            <h3>${escapeHtml(item.name || "Website Visitor")}</h3>
+            <span class="tag active">New</span>
+          </div>
+          <div class="message-meta" style="margin-top:10px">
+            <span>Email: ${escapeHtml(item.email || "-")}</span>
+            <span>Phone: ${escapeHtml(item.phone || "-")}</span>
+            <span>Trip Type: ${escapeHtml(item.tripType || "-")}</span>
+            <span class="message-date">${escapeHtml(item.createdAt ? new Date(item.createdAt).toLocaleString() : "-")}</span>
+          </div>
+          <div class="message-body">${escapeHtml(item.message || "")}</div>
+          <div class="message-actions">
+            <button class="btn-danger" onclick="deleteContactMessage('${item.id}')">Delete Message</button>
+          </div>
+        </article>
+      `).join("");
+    }
+    function openMessageDeleteModal(id) {
+      messageDeleteId = id;
+      $("#messageDeleteModal").classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+    function closeMessageDeleteModal() {
+      $("#messageDeleteModal").classList.remove("show");
+      messageDeleteId = null;
+      document.body.style.overflow = "";
+    }
+    async function confirmMessageDelete() {
+      if (!messageDeleteId) return;
+      const id = messageDeleteId;
+      try {
+        const result = await deleteContactMessageFromServer(id);
+        if (result && result.error) throw new Error(result.error);
+        messagesCache = messagesCache.filter((item) => item.id !== id);
+        $("#statMessages").textContent = messagesCache.length;
+        closeMessageDeleteModal();
+        renderMessages();
+        showToast("Message deleted successfully.");
+      } catch (error) {
+        showToast("An error occurred while deleting the message.");
+      }
+    }
+    function deleteContactMessage(id) { openMessageDeleteModal(id); }
+    function setStatusFilter(filter) {
+      currentStatusFilter = filter;
+      $$(".btn-filter").forEach((button) => button.classList.toggle("active", button.dataset.filter === filter));
+      renderTrips();
+    }
+    function filterTrips(trips) {
+      const query = $("#searchInput").value.trim().toLowerCase();
+      return trips.filter((trip) => {
+        const matchesQuery = !query || [trip.title, trip.destination, trip.category].some((field) => (field || "").toLowerCase().includes(query));
+        const matchesStatus = currentStatusFilter === "all" || (currentStatusFilter === "active" && trip.status !== false) || (currentStatusFilter === "inactive" && trip.status === false);
+        return matchesQuery && matchesStatus;
+      });
+    }
+    function renderTrips() {
+      const trips = filterTrips(tripsCache);
+      const emptyState = $("#emptyState");
+      const tripList = $("#tripList");
+      if (!trips.length) {
+        emptyState.classList.remove("hidden");
+        tripList.classList.add("hidden");
+        tripList.innerHTML = "";
+        return;
+      }
+      emptyState.classList.add("hidden");
+      tripList.classList.remove("hidden");
+      tripList.innerHTML = trips.map((trip) => {
+        const hasHot = trip.hot ? '<span class="tag">🔥 Hot Deal</span>' : "";
+        const hasFeatured = trip.featured ? '<span class="tag active">⭐ Featured</span>' : "";
+        const statusTag = trip.status === false ? '<span class="tag">⏸️ Inactive</span>' : '<span class="tag active">✅ Active</span>';
+        return `
+          <article class="trip-card">
+            <img class="trip-thumb" src="${trip.image || ""}" alt="${escapeHtml(trip.title)}" onerror="this.src='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80'">
+            <div>
+              <h3 class="trip-name">${escapeHtml(trip.title || "Untitled Tour")}</h3>
+              <div class="trip-meta"><span>${escapeHtml(trip.destination || "-")}</span><span>•</span><span>${escapeHtml(trip.category || "-")}</span><span>•</span><span>$${Number(trip.price || 0).toLocaleString()}</span></div>
+              <div class="trip-meta" style="margin-top:12px">${statusTag}${hasFeatured}${hasHot}<span class="tag">👥 ${escapeHtml(trip.seats || "-")}</span><span class="tag">⭐ ${escapeHtml(trip.rating || "-")}</span></div>
+            </div>
+            <div class="trip-actions">
+              <button class="icon-btn" onclick="openEditModal('${trip.id}')" title="تعديل"><i class="bi bi-pencil-square"></i></button>
+              <button class="icon-btn delete" onclick="openDelModal('${trip.id}')" title="Delete"><i class="bi bi-trash3"></i></button>
+            </div>
+          </article>`;
+      }).join("");
+    }
+    function resetFormState() { formState = { includes: [], excludes: [], schedule: [], gallery: [] }; }
+    function clearForm() {
+      editId = null;
+      resetFormState();
+      ["tripId","fTitle","fDest","fDuration","fSeats","fRating","fDesc","fImage","fSinglePrice","fDoublePrice","fTriplePrice","fPrice","fOldPrice","includeInput","excludeInput","galleryUrlInput"].forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) element.value = "";
+      });
+      $("#fCat").value = "Economy";
+      $("#fStatus").checked = true;
+      $("#fFeatured").checked = false;
+      $("#mainImageFile").value = "";
+      $("#galleryFile").value = "";
+      syncMainImagePreview();
+      renderList("includes");
+      renderList("excludes");
+      renderSchedule();
+      renderGallery();
+      switchTripTab("basic");
+    }
+    function openAddModal() {
+      clearForm();
+      $("#tripModalTitle").textContent = "✨ Add New Tour";
+      $("#tripModal").classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+    function closeTripModal() { $("#tripModal").classList.remove("show"); document.body.style.overflow = ""; }
+    function switchTripTab(tab) {
+      $$(".tab-btn").forEach((button) => button.classList.toggle("active", button.dataset.tab === tab));
+      $$(".tab-panel").forEach((panel) => panel.classList.toggle("active", panel.id === "tab-" + tab));
+    }
+    function normalizeImageUrl(url) {
+      const value = (url || "").trim();
+      if (!value) return "";
+      if (/^(https?:|data:|blob:)/i.test(value)) return value;
+      if (/^www\./i.test(value)) return "https://" + value;
+      return value;
+    }
+    function syncMainImagePreview() {
+      const dropzone = $("#mainImageDropzone");
+      const input = $("#fImage");
+      const url = normalizeImageUrl(input.value);
+      if (url !== input.value.trim()) input.value = url;
+      if (url) {
+        dropzone.classList.add("has-image");
+        dropzone.style.backgroundImage = `url("${url.replace(/\"/g, "&quot;")}")`;
+      } else {
+        dropzone.classList.remove("has-image");
+        dropzone.style.backgroundImage = "none";
+      }
+    }
+    function handleMainImageFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => { $("#fImage").value = reader.result; syncMainImagePreview(); };
+      reader.readAsDataURL(file);
+    }
+    function addListItem(type) {
+      const input = $("#" + (type === "includes" ? "includeInput" : "excludeInput"));
+      const value = input.value.trim();
+      if (!value) return;
+      formState[type].push(value);
+      input.value = "";
+      renderList(type);
+    }
+    function removeListItem(type, index) { formState[type].splice(index, 1); renderList(type); }
+    function renderList(type) {
+      const box = $("#" + type + "Box");
+      const items = formState[type];
+      if (!items.length) {
+        box.className = "chips-box empty";
+        box.textContent = type === "includes" ? "No included items yet" : "No excluded items yet";
+        return;
+      }
+      box.className = "chips-box";
+      box.innerHTML = items.map((item, index) => `<span class="chip">${escapeHtml(item)} <button type="button" onclick="removeListItem('${type}', ${index})">×</button></span>`).join("");
+    }
+    function addScheduleDay() {
+      formState.schedule.push({ title: "Day " + (formState.schedule.length + 1), details: "" });
+      renderSchedule();
+    }
+    function updateSchedule(index, key, value) { formState.schedule[index][key] = value; }
+    function removeSchedule(index) { formState.schedule.splice(index, 1); renderSchedule(); }
+    function renderSchedule() {
+      const box = $("#scheduleBox");
+      if (!formState.schedule.length) {
+        box.className = "schedule-box empty";
+        box.textContent = 'لا يوجد أيام مضافة - اضغط "+ Add Day"';
+        return;
+      }
+      box.className = "schedule-box";
+      box.innerHTML = formState.schedule.map((day, index) => `
+        <article class="day-card">
+          <div class="day-card-head"><strong>${escapeHtml(day.title || "Day " + (index + 1))}</strong><button class="icon-btn delete" type="button" onclick="removeSchedule(${index})"><i class="bi bi-trash3"></i></button></div>
+          <div class="field"><label>Day Title</label><input type="text" value="${escapeHtml(day.title || "")}" oninput="updateSchedule(${index}, 'title', this.value)"></div>
+          <div class="field"><label>Day Details</label><textarea oninput="updateSchedule(${index}, 'details', this.value)">${escapeHtml(day.details || "")}</textarea></div>
+        </article>`).join("");
+    }
+    function addGalleryUrl() {
+      const input = $("#galleryUrlInput");
+      const url = normalizeImageUrl(input.value);
+      if (!url) return;
+      formState.gallery.push(url);
+      input.value = "";
+      renderGallery();
+    }
+    function handleGalleryFiles(event) {
+      const files = Array.from(event.target.files || []);
+      if (!files.length) return;
+      let pending = files.length;
+      files.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          formState.gallery.push(reader.result);
+          pending -= 1;
+          if (pending === 0) renderGallery();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    function removeGallery(index) { formState.gallery.splice(index, 1); renderGallery(); }
+    function renderGallery() {
+      const list = $("#galleryList");
+      if (!formState.gallery.length) {
+        list.className = "gallery-list empty";
+        list.textContent = "لا توجد صور للبرنامج - اUpload Program Photos من الأعلى";
+        return;
+      }
+      list.className = "gallery-list";
+      list.innerHTML = `<div class="gallery-grid">${formState.gallery.map((url, index) => `
+        <article class="gallery-item">
+          <img src="${url}" alt="Image ${index + 1}">
+          <footer><span>Image ${index + 1}</span><button class="icon-btn delete" type="button" onclick="removeGallery(${index})"><i class="bi bi-trash3"></i></button></footer>
+        </article>`).join("")}</div>`;
+    }
+    async function openEditModal(id) {
+      const trip = tripsCache.find((item) => item.id === id);
+      if (!trip) return;
+      clearForm();
+      editId = trip.id;
+      $("#tripModalTitle").textContent = "✨ تعديل رحلة";
+      $("#tripId").value = trip.id || "";
+      $("#fTitle").value = trip.title || "";
+      $("#fDest").value = trip.destination || "";
+      $("#fDuration").value = trip.duration || "";
+      $("#fSeats").value = trip.seats || "";
+      $("#fCat").value = trip.category || "Economy";
+      $("#fRating").value = trip.rating || "";
+      $("#fDesc").value = trip.description || "";
+      $("#fImage").value = trip.image || "";
+      $("#fSinglePrice").value = trip.singlePrice || "";
+      $("#fDoublePrice").value = trip.doublePrice || "";
+      $("#fTriplePrice").value = trip.triplePrice || "";
+      $("#fPrice").value = trip.price || "";
+      $("#fOldPrice").value = trip.oldPrice || "";
+      $("#fStatus").checked = trip.status !== false;
+      $("#fFeatured").checked = !!trip.featured;
+      formState.includes = [...(trip.includesList || splitCSV(trip.includes))];
+      formState.excludes = [...(trip.excludesList || [])];
+      formState.schedule = Array.isArray(trip.schedule) ? trip.schedule.map((item) => ({ title: item.title || "", details: item.details || "" })) : [];
+      formState.gallery = Array.isArray(trip.gallery) ? [...trip.gallery] : [];
+      syncMainImagePreview();
+      renderList("includes");
+      renderList("excludes");
+      renderSchedule();
+      renderGallery();
+      $("#tripModal").classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+    function collectTripData() {
+      const title = $("#fTitle").value.trim();
+      const image = normalizeImageUrl($("#fImage").value);
+      const duration = $("#fDuration").value.trim();
+      const category = $("#fCat").value.trim();
+      const price = $("#fPrice").value.trim();
+      if (!title || !image) {
+        showToast("يرجى إدخال اسم الرحلة وPhotosة Main");
+        switchTripTab("basic");
+        return null;
+      }
+      return {
+        id: editId || genId(),
+        title,
+        destination: $("#fDest").value.trim(),
+        category,
+        duration: duration || "",
+        seats: $("#fSeats").value.trim(),
+        rating: $("#fRating").value.trim() || "0",
+        description: $("#fDesc").value.trim(),
+        image,
+        price: price || $("#fDoublePrice").value.trim() || "0",
+        oldPrice: $("#fOldPrice").value.trim(),
+        reviews: "0",
+        featured: $("#fFeatured").checked,
+        hot: false,
+        includes: formState.includes.join(","),
+        includesList: [...formState.includes],
+        excludesList: [...formState.excludes],
+        schedule: formState.schedule.filter((item) => (item.title || item.details || "").trim()),
+        gallery: [...formState.gallery],
+        singlePrice: $("#fSinglePrice").value.trim(),
+        doublePrice: $("#fDoublePrice").value.trim(),
+        triplePrice: $("#fTriplePrice").value.trim(),
+        status: $("#fStatus").checked
+      };
+    }
+    async function saveTrip() {
+      const trip = collectTripData();
+      if (!trip) return;
+      try {
+        await saveTripToServer(trip);
+        await refreshAll();
+        closeTripModal();
+        showToast(editId ? "Tour updated successfully." : "تم Save Tour بنجاح");
+      } catch (error) {
+        showToast("حدث خطأ أثناء Save Tour");
+      }
+    }
+    function openDelModal(id) { deleteId = id; $("#delModal").classList.add("show"); document.body.style.overflow = "hidden"; }
+    function closeDeleteModal() { $("#delModal").classList.remove("show"); document.body.style.overflow = ""; }
+    async function confirmDelete() {
+      if (!deleteId) return;
+      try {
+        await deleteTripFromServer(deleteId);
+        deleteId = null;
+        closeDeleteModal();
+        await refreshAll();
+        showToast("تم Delete الرحلة بنجاح");
+      } catch (error) {
+        showToast("حدث خطأ أثناء Delete الرحلة");
+      }
+    }
+    function saveSettings() {
+      const user = $("#settUser").value.trim();
+      const pass = $("#settPass").value;
+      if (!user) { showToast("Username لا يمكن أن يكون فارغًا"); return; }
+      currentCreds.user = user;
+      if (pass) currentCreds.pass = pass;
+      $("#settPass").value = "";
+      showToast("تم Save Settings");
+    }
+    async function saveSettings() {
+      const user = $("#settUser").value.trim();
+      const pass = $("#settPass").value;
+      if (!user) { showToast("Username cannot be empty"); return; }
+      const result = await postAdminAction({ action: "auth_update", user, pass });
+      if (result && result.error) {
+        showToast(result.error);
+        return;
+      }
+      currentCreds.user = result.user || user;
+      $("#settPass").value = "";
+      showToast("Settings saved successfully.");
+    }
+    async function resetData() {
+      const confirmed = confirm("سيتم إعادة الرحلات الافتراضية وDelete أي تعديلات حالية. هل تريد المتابعة؟");
+      if (!confirmed) return;
+      try {
+        await resetTripsOnServer();
+        await refreshAll();
+        showToast("تمت Reset Data");
+      } catch (error) {
+        showToast("An error occurred while resetting data.");
+      }
+    }
+    function toggleSwitch(element) {
+      const input = element.querySelector("input");
+      input.checked = !input.checked;
+      element.classList.toggle("checked", input.checked);
+    }
+    window.addEventListener("click", (event) => {
+      if (event.target === $("#tripModal")) closeTripModal();
+      if (event.target === $("#delModal")) closeDeleteModal();
+      if (event.target === $("#messageDeleteModal")) closeMessageDeleteModal();
+    });
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") { closeTripModal(); closeDeleteModal(); closeMessageDeleteModal(); }
+    });
+    $("#loginPass").addEventListener("keydown", (event) => { if (event.key === "Enter") doLogin(); });
+    (async () => {
+      showLoginScreen();
+      const status = await getAuthStatus().catch(() => ({ authenticated: false }));
+      if (status && status.user) {
+        currentCreds.user = status.user;
+        $("#loginUser").value = status.user;
+      }
+      if (status && status.authenticated) {
+        showLoggedInApp();
+        await initApp();
+      }
+    })();
+  </script>
+</body>
+</html>
